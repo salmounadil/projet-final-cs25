@@ -1,0 +1,10 @@
+@extends('layouts.frontend.app')
+@section('content')
+    @include('partials.frontend.section1Home')
+    @include('partials.frontend.featuredCategory')
+    @include('partials.frontend.awesome')
+    @include('partials.frontend.weekly')
+    @include('partials.frontend.bestSellers')
+    @include('partials.frontend.suscribe')
+    @include('partials.frontend.logos')
+@endsection
