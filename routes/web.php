@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\CommentaireController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\ProfileController;
 use App\Mail\ProductMail;
 use App\Models\User;
@@ -26,8 +28,11 @@ Route::get('/', [HomeController::class,'home']);
 
 
 Route::post('/mail/product',[MailController::class,'productmail']);
+Route::post('/mail/newsletter',[MailController::class,'newsletterMail']);
+Route::post('/commentaire',[CommentaireController::class,'commentaire']);
 
 Route::resource('contact', ContactController::class);
+Route::resource('produit', ProduitController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

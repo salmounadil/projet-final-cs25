@@ -24,8 +24,12 @@
                                                         <span class="text-danger">${{ $produits[$nbr]->prix / 100 * (100-$produits[$nbr]->promo) }}         (-{{ $produits[$nbr]->promo }}%)</span>
                                                     @endif
                                                 </h3>
-                                                <a href="#" class="add_cart">+ add to cart<i
-                                                        class="ti-heart"></i></a>
+                                                @auth
+                                                     <div class="d-flex align-items-center justify-content-between">
+                                                    <a href="" class="add_cart">+ add to cart</a>
+                                                    <a href="" class="add_cart"><i class="ti-heart"></i></a>
+                                                </div>
+                                                @endauth
                                             </div>
                                         </div>
                                     </div>

@@ -11,9 +11,9 @@
             <div class="col-lg-12">
                 <div class="best_product_slider owl-carousel">
                     @foreach ($produits as $produit)
-                        
-                    <div class="single_product_item">
-                        <img src="img/awesome/{{ $produit->image}}.png" alt="">
+                        @if ($produit->stock < 5)
+                            <div class="single_product_item">
+                        <img src="{{ asset('/img/awesome/'.$produit->image.'.png') }}" alt="">
                         <div class="single_product_text">
                             <h4>{{ $produit->nom }}</h4>
                             <h3 ><span style="{{($produit->promo) ? 'text-decoration:line-through;' : null  }}">${{ $produit->prix }}</span>@if ($produit->promo)
@@ -22,6 +22,7 @@
                         </h3>
                         </div>
                     </div>
+                        @endif
                     @endforeach
                     
                 </div>

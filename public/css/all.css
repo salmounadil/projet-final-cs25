@@ -1460,7 +1460,8 @@ readers do not read off random characters that represent icons */
 .fa-eye-slash:before {
   content: "\f070"; }
 
-
+.fa-facebook:before {
+  content: "\f09a"; }
 
 .fa-facebook-f:before {
   content: "\f39e"; }

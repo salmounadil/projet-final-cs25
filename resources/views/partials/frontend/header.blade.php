@@ -1,4 +1,5 @@
 <header class="main_menu home_menu">
+    @include('partials.frontend.flash')
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-12">

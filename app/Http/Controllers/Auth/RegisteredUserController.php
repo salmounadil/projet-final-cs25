@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Mail\NewsletterMail;
+use App\Models\Newsletter;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use App\Rules\Aucun;
@@ -80,7 +81,6 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'username' => $request->username,
             'imageFile' => $request->file('imageFile')->hashName(),
-            'newsletter'=>$request->newsletter,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
@@ -89,14 +89,17 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'username' => $request->username,
             'image' => $request->image,
-            'newsletter'=>$request->newsletter,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
        }
 
-       if ($request->newsletter) {
+       if ($request->newsletter && Newsletter::all()->where('email',$request->email)->count() == 0 ) {
         Mail::to($user->email)->send(new NewsletterMail);
+        $store = new Newsletter();
+        $store->email = $request->email;
+        $store->save();
+
        }
 
 

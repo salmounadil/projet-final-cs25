@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Commentaire;
 use App\Models\Produit;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ProduitController extends Controller
@@ -46,7 +48,10 @@ class ProduitController extends Controller
      */
     public function show(Produit $produit)
     {
-        //
+        $commentaires = Commentaire::all();
+        $users = User::all();
+        $produits = Produit::all();
+        return view('pages.frontend.singleProduct',compact('produit','produits','users','commentaires'));
     }
 
     /**
