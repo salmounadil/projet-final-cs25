@@ -47,7 +47,7 @@
                     <ul class="list">
                         <li>
                             <a class="active" href="#">
-                                <span>Category</span> : {{ $produit->categorie }}</a>
+                                <span>Category</span> : {{ $produit->categorie->categorie }}</a>
                         </li>
                         <li>
                             <a href="#"> <span>Availibility</span> : {{ $produit->stock }}</a>
@@ -89,7 +89,7 @@
                     aria-controls="contact" aria-selected="false">Comments</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" id="review-tab" data-toggle="tab" href="#review" role="tab"
+                <a class="nav-link" id="review-tab" data-toggle="tab" href="#review" role="tab"
                     aria-controls="review" aria-selected="false">Reviews</a>
             </li>
         </ul>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentaireController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
@@ -24,7 +25,11 @@ use Intervention\Image\Facades\Image;
 |
 */
 
-Route::get('/', [HomeController::class,'home']);
+Route::get('/', [HomeController::class,'home'])->name('home');
+Route::get('/category', [HomeController::class,'category'])->name('category');
+Route::get('/categorie/{id}', [HomeController::class,'viewByCategory'])->name('categorie/{id}');
+Route::get('/couleur/{id}', [HomeController::class,'viewByColor'])->name('couleur/{id}');
+Route::get('/category/search', [HomeController::class,'viewBySearch'])->name('categorySearch');
 
 
 Route::post('/mail/product',[MailController::class,'productmail']);
@@ -33,6 +38,7 @@ Route::post('/commentaire',[CommentaireController::class,'commentaire']);
 
 Route::resource('contact', ContactController::class);
 Route::resource('produit', ProduitController::class);
+Route::resource('blog', BlogController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

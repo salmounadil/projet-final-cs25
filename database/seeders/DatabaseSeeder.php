@@ -22,7 +22,13 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
             RoleSeeder::class,
-            ProduitSeeder::class
+            CouleurSeeder::class,
+            CategorieSeeder::class,
+            ProduitSeeder::class,
+            UserSeeder::class,
+            BlogSeeder::class,
+            TagSeeder::class,
+            BlogTagSeeder::class
         ]);
     }
 }

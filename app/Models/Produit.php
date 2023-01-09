@@ -11,4 +11,10 @@ class Produit extends Model
     public function commentaire(){
         return $this->hasMany(Commentaire::class);
     }
+    public function couleur(){
+        return $this->belongsTo(Couleur::class);
+    }
+    public function categorie(){
+        return $this->belongsTo(Categorie::class);
+    }
 }

@@ -15,7 +15,7 @@
                         <div class="single_product_list_slider">
                             <div class="row align-items-center justify-content-between">
                                 @for ($j = 0; $j < 8 && $nbr < $produits->count(); $j++)
-                                    <div class="col-lg-3 col-sm-6">
+                                    <div href="/produit/{{ $produits[$nbr]->id }}" class="col-lg-3 col-sm-6">
                                         <div class="single_product_item">
                                             <img src="img/awesome/{{ $produits[$nbr]->image }}.png" alt="">
                                             <div class="single_product_text">
