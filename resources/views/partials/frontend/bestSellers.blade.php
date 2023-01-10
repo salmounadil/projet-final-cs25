@@ -16,8 +16,8 @@
                         <a href="/produit/{{ $produit->id }}"><img src="{{ asset('/img/awesome/'.$produit->image.'.png') }}" alt=""></a>
                         <div class="single_product_text">
                             <h4>{{ $produit->nom }}</h4>
-                            <h3 ><span style="{{($produit->promo) ? 'text-decoration:line-through;' : null  }}">${{ $produit->prix }}</span>@if ($produit->promo)
-                                <span class="text-danger">${{ $produit->prix / 100 * (100-$produit->promo) }}         (-{{ $produit->promo }}%)</span>
+                            <h3 ><span style="{{($produit->promo > 0) ? 'text-decoration:line-through;' : null  }}">${{ $produit->prix }}.00</span>@if ($produit->promo > 0)
+                                <span class="text-danger">${{ $produit->prixfinal }}         (-{{ $produit->promo }}%)</span>
                             @endif
                         </h3>
                         </div>

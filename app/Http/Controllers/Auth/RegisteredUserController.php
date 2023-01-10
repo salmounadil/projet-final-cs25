@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Mail\NewsletterMail;
 use App\Models\Newsletter;
+use App\Models\Panier;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use App\Rules\Aucun;
@@ -78,19 +79,23 @@ class RegisteredUserController extends Controller
         }
         
        if ($request->file('imageFile')) {
+        $panier = new Panier();
         $user = User::create([
             'username' => $request->username,
             'imageFile' => $request->file('imageFile')->hashName(),
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'panier_id'=> $panier->id
         ]);
        }
        elseif ($request->image) {
+        $panier = new Panier();
         $user = User::create([
             'username' => $request->username,
             'image' => $request->image,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'panier_id'=> $panier->id
         ]);
        }
 

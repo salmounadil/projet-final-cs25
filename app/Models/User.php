@@ -54,4 +54,7 @@ class User extends Authenticatable
     public function comblog(){
         return $this->hasMany(Comblog::class);
     }
+    public function panier(){
+        return $this->hasOne(Panier::class);
+    }
 }

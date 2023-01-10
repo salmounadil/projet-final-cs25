@@ -17,16 +17,21 @@
                                 @for ($j = 0; $j < 8 && $nbr < $produits->count(); $j++)
                                     <div href="/produit/{{ $produits[$nbr]->id }}" class="col-lg-3 col-sm-6">
                                         <div class="single_product_item">
-                                            <img src="img/awesome/{{ $produits[$nbr]->image }}.png" alt="">
+                                            <a href="/produit/{{ $produits[$nbr]->id }}"><img src="img/awesome/{{ $produits[$nbr]->image }}.png" alt=""></a>
                                             <div class="single_product_text">
                                                 <h4 >{{ $produits[$nbr]->nom }}</h4>
-                                                <h3 ><span style="{{($produits[$nbr]->promo) ? 'text-decoration:line-through;' : null  }}">${{ $produits[$nbr]->prix }}</span>@if ($produits[$nbr]->promo)
-                                                        <span class="text-danger">${{ $produits[$nbr]->prix / 100 * (100-$produits[$nbr]->promo) }}         (-{{ $produits[$nbr]->promo }}%)</span>
+                                                <h3 ><span style="{{($produits[$nbr]->promo > 0) ? 'text-decoration:line-through;' : null  }}">${{ $produits[$nbr]->prix }}.00</span>@if ($produits[$nbr]->promo > 0)
+                                                        <span class="text-danger">${{ $produits[$nbr]->prixfinal}}      (-{{ $produits[$nbr]->promo }}%)</span>
                                                     @endif
                                                 </h3>
                                                 @auth
                                                      <div class="d-flex align-items-center justify-content-between">
-                                                    <a href="" class="add_cart">+ add to cart</a>
+                                                        <form action="/panier" method="POST">
+                                                            @csrf
+                                                            <input type="hidden" name="id" value="{{ $produits[$nbr]->id }}">
+                                                            <input type="submit" class="add_cart" value="add to cart">
+                                                        </form>
+                                                    
                                                     <a href="" class="add_cart"><i class="ti-heart"></i></a>
                                                 </div>
                                                 @endauth

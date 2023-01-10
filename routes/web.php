@@ -6,6 +6,7 @@ use App\Http\Controllers\CommentaireController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\PanierController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\ProfileController;
 use App\Mail\ProductMail;
@@ -43,6 +44,7 @@ Route::post('/commentaire',[CommentaireController::class,'commentaire']);
 Route::resource('contact', ContactController::class);
 Route::resource('produit', ProduitController::class);
 Route::resource('blog', BlogController::class);
+Route::resource('panier', PanierController::class);
 Route::post('/comBlog', [ComblogController::class,'store']);
 
 Route::get('/dashboard', function () {

@@ -55,11 +55,12 @@
                                 </form>
                             </ul>
                           </div>
-                          <div class="dropdown cart d-flex align-items-center">
-                            <a class="dropdown-toggle" href="/cart.html" id="navbarDropdown3" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <div class="dropdown cart d-flex align-items-center position-relative">
+                            <a class="dropdown-toggle" href="/panier" id="navbarDropdown3" role="button"
+                                 aria-haspopup="true" >
                                 <i class="fas fa-cart-plus"></i>
                             </a>
+                            <div class="panier">{{ Auth::user()->panier->produitsPanier->count() }}</div>
                             <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <div class="single_product">
 

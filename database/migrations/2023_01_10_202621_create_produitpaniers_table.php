@@ -13,18 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('produits', function (Blueprint $table) {
+        Schema::create('produitpaniers', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
-            $table->foreignId('categorie_id')->constrained();
-            $table->foreignId('couleur_id')->constrained();
-            $table->string('image')->nullable();
-            $table->string('imageFile')->nullable();
-            $table->integer('prix');
-            $table->integer('promo')->default(0);
+            $table->string('image');
+            $table->integer('idproduit')->constrained();
             $table->integer('prixfinal');
-            $table->integer('stock');
-            $table->text('description');
+            $table->integer('prixtotal');
+            $table->integer('quantité');
+            $table->foreignId('panier_id')->constrained();
             $table->timestamps();
         });
     }
@@ -36,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('produits');
+        Schema::dropIfExists('produitpaniers');
     }
 };
