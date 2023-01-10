@@ -51,4 +51,7 @@ class User extends Authenticatable
     public function commentaire(){
         return $this->hasMany(Commentaire::class);
     }
+    public function comblog(){
+        return $this->hasMany(Comblog::class);
+    }
 }

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->string('titre');
             $table->text('texte');
+            $table->foreignId('categoryblog_id')->constrained();
             $table->timestamps();
         });
     }

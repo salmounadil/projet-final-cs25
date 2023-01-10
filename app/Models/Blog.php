@@ -11,4 +11,10 @@ class Blog extends Model
     public function tag(){
         return $this->belongsToMany(Tag::class);
     }
+    public function categoryblog(){
+        return $this->belongsTo(Categoryblog::class);
+    }
+    public function comblog(){
+        return $this->hasMany(Comblog::class);
+    }
 }

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use App\Models\Categorie;
 use App\Models\Couleur;
 use App\Models\Produit;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -52,6 +54,8 @@ class HomeController extends Controller
         $produitsSearch = Produit::where('nom','LIKE',"%$request->recherche%")->orWhere('categorie_id','LIKE',$categoryID)->get();
         return view('pages.frontend.shopCategorySearch',compact('produits','categories','couleurs','couleur','produitsSearch'));
     }
+
+  
 
     
 }

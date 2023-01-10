@@ -179,7 +179,7 @@
                             @php
                                 $count = 0;
                             @endphp
-                            @foreach ($commentaires->reverse() as $commentaire)
+                            @foreach ($commentaires->where('produit_id', $produit->id)->reverse() as $commentaire)
                                 <div class="review_item {{ $count % 2 == 0 ? 'reply' : null }}">
                                     <div class="media">
                                         <div class="d-flex">

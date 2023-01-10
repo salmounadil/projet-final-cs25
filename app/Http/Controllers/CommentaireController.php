@@ -51,6 +51,6 @@ class CommentaireController extends Controller
         $store->date = $date;
         $store->produit_id = $request->id;
         $store->save();
-        return redirect()->back();
+        return redirect()->back()->with('success','Votre commentaire a bien été posté');
     }
 }

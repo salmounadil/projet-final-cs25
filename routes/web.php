@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ComblogController;
 use App\Http\Controllers\CommentaireController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
@@ -30,6 +31,9 @@ Route::get('/category', [HomeController::class,'category'])->name('category');
 Route::get('/categorie/{id}', [HomeController::class,'viewByCategory'])->name('categorie/{id}');
 Route::get('/couleur/{id}', [HomeController::class,'viewByColor'])->name('couleur/{id}');
 Route::get('/category/search', [HomeController::class,'viewBySearch'])->name('categorySearch');
+Route::get('/tags/{id}', [BlogController::class,'filterByTags']);
+Route::get('/blog/search', [BlogController::class,'filterBySearch']);
+Route::get('/blogs/category/{id}', [BlogController::class,'filterByCategory']);
 
 
 Route::post('/mail/product',[MailController::class,'productmail']);
@@ -39,6 +43,7 @@ Route::post('/commentaire',[CommentaireController::class,'commentaire']);
 Route::resource('contact', ContactController::class);
 Route::resource('produit', ProduitController::class);
 Route::resource('blog', BlogController::class);
+Route::post('/comBlog', [ComblogController::class,'store']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('categoryblogs', function (Blueprint $table) {
             $table->id();
+            $table->string('categorie');
             $table->timestamps();
         });
     }

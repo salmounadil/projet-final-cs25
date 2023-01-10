@@ -21,7 +21,7 @@
                         @foreach ($blogs as $blog )
                             <article class="blog_item">
                             <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="storage/blog/{{ $blog->image }}" alt="">
+                                <img class="card-img rounded-0" src="{{ asset('storage/blog/'.$blog->image) }}" alt="">
                                 <a href="#" class="blog_item_date">
                                     <h3>{{$blog->dateJ  }}</h3>
                                     <p>{{ $blog->dateM }}</p>
@@ -29,7 +29,7 @@
                             </div>
 
                             <div class="blog_details">
-                                <a class="d-inline-block" href="single-blog.html">
+                                <a class="d-inline-block" href="/blog/{{ $blog->id }}">
                                     <h2>{{ $blog->titre }}</h2>
                                 </a>
                                 <p>
@@ -48,28 +48,30 @@
                                             @endforeach
                                         </a></li>
                                     
-                                    <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>
+                                    <li><a href="#"><i class="far fa-comments"></i> {{ $blog->comblog->count() }} Comments</a></li>
                                 </ul>
                             </div>
                         </article>
                         @endforeach
                         <nav class="blog-pagination justify-content-center d-flex">
+                            @if (Request::path() == 'blog')
                             {{ $blogs->links('partials.frontend.paginationBlog') }}
-
+                            @endif
                         </nav>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="blog_right_sidebar">
                         <aside class="single_sidebar_widget search_widget">
-                            <form action="#">
+                            <form action="/blog/search" method="GET">
+                                @csrf
                                 <div class="form-group">
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control" placeholder='Search Keyword'
+                                        <input type="text" name="recherche" class="form-control" placeholder='Search Keyword'
                                             onfocus="this.placeholder = ''"
                                             onblur="this.placeholder = 'Search Keyword'">
                                         <div class="input-group-append">
-                                            <button class="btn" type="button"><i class="ti-search"></i></button>
+                                            <button class="btn" type="submit"><i class="ti-search"></i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -81,52 +83,22 @@
                         <aside class="single_sidebar_widget post_category_widget">
                             <h4 class="widget_title">Category</h4>
                             <ul class="list cat-list">
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Resaurant food</p>
-                                        <p>(37)</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Travel news</p>
-                                        <p>(10)</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Modern technology</p>
-                                        <p>(03)</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Product</p>
-                                        <p>(11)</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Inspiration</p>
-                                        <p>21</p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="d-flex">
-                                        <p>Health Care (21)</p>
-                                        <p>09</p>
-                                    </a>
-                                </li>
+                                    @foreach ($categoryBlogs as $category )
+                                    <li>
+                                        <a href="/blogs/category/{{ $category->id }}" class="d-flex">
+                                            <p>{{ $category->categorie }}</p>
+                                        </a>   
+                                    </li> 
+                                    @endforeach
                             </ul>
                         </aside>
-
                         <aside class="single_sidebar_widget popular_post_widget">
                             <h3 class="widget_title">Recent Post</h3>
                             @foreach ($recentBlogs as $blog )
                                <div class="media post_item">
                                 <img src="{{ asset('storage/recentPost/'.$blog->image) }}" alt="post">
                                 <div class="media-body">
-                                    <a href="single-blog.html">
+                                    <a href="/blog/{{ $blog->id }}">
                                         @if ( Str::length($blog->titre)>20) 
                                         <h3> {{ Str::substr($blog->titre, 0, 20) }}...</h3>  
                                     @else
@@ -143,7 +115,7 @@
                             <ul class="list">
                                 @foreach ($tags as $tag)
                                    <li>
-                                    <a href="#">{{ $tag->tag }}</a>
+                                    <a href="/tags/{{ $tag->id }}">{{ $tag->tag }}</a>
                                 </li> 
                                 @endforeach
                             </ul>

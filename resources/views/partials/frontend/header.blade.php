@@ -10,7 +10,6 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                         <span class="menu_icon"><i class="fas fa-bars"></i></span>
                     </button>
-
                     <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                         <ul class="navbar-nav">
                             <li class="nav-item">
@@ -25,7 +24,7 @@
                                     <a class="dropdown-item" href="/category"> shop category</a>                                    
                                 </div>
                             </li>
-                           
+
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_2"
                                     role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

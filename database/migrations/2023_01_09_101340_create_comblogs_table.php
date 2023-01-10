@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nom'); 
             $table->string('email'); 
             $table->string('site'); 
+            $table->string('date'); 
             $table->string('message'); 
             $table->foreignId('blog_id')->constrained(); 
             $table->foreignId('user_id')->nullable()->constrained(); 
