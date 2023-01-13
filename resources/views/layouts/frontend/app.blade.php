@@ -60,7 +60,7 @@
     <script src="{{ asset('js/masonry.pkgd.js') }}"></script>
     <!-- particles js -->
     <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
+    {{-- <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script> --}}
     <!-- slick js -->
     <script src="{{ asset('js/slick.min.js') }}"></script>
     <script src="{{ asset('js/jquery.counterup.min.js') }}"></script>

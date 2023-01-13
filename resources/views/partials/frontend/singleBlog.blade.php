@@ -59,7 +59,7 @@
                                 @if ($users->where('email', $com->email)->count() > 0)
                                                 @if ($com->user->image == true)
                                                     <img class="rounded-circle"
-                                                        src="{{ asset('storage/' . $com->user->username . '.jpg') }}"
+                                                        src="{{ asset('storage/'. $com->user->image) }}"
                                                         alt="" />
                                                 @endif
                                                 @if ($com->user->imageFile)
@@ -158,7 +158,9 @@
                        <h3 class="widget_title">Recent Post</h3>
                        @foreach ($recentBlogs as $blog )
                                <div class="media post_item">
+                                 <a href="/blog/{{ $blog->id }}">
                                 <img src="{{ asset('storage/recentPost/'.$blog->image) }}" alt="post">
+                                 </a>
                                 <div class="media-body">
                                     <a href="/blog/{{ $blog->id }}">
                                         @if ( Str::length($blog->titre)>20) 

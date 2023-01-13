@@ -8,7 +8,7 @@
     <link rel="icon" href="{{ asset('img/favicon.png') }}">
 </head>
 <body>
-    <p>Bonjour,</p>
+    <p style="background-color: red; color:blue;">Bonjour,</p>
     <p>Vous êtes bien inscrit à la Newsletter,
     L'équipe d'Aranoz vous souhaite la bienvenue.</p>
     <p>Cordialement</p>

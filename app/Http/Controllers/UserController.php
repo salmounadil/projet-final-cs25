@@ -2,21 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Commentaire;
-use App\Models\Produit;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class ProduitController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
+     * 
+     * 
      */
+
+    public function __construct()
+    {
+        $this->middleware('IsAdmin');
+    }
+
     public function index()
     {
-        //
+        $users = User::all();
+        return view('pages.backend.user',compact('users'));
     }
 
     /**
@@ -43,25 +50,21 @@ class ProduitController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Produit  $produit
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Produit $produit)
+    public function show($id)
     {
-        $commentaires = Commentaire::all();
-        $users = User::all();
-        $produits = Produit::all();
-        $produitsBest = Produit::all();
-        return view('pages.frontend.singleProduct',compact('produit','produits','produitsBest','users','commentaires'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Produit  $produit
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Produit $produit)
+    public function edit($id)
     {
         //
     }
@@ -70,10 +73,10 @@ class ProduitController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Produit  $produit
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Produit $produit)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -81,10 +84,10 @@ class ProduitController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Produit  $produit
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Produit $produit)
+    public function destroy($id)
     {
         //
     }

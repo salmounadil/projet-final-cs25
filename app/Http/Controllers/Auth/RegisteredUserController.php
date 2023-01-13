@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\Confirmation;
 use App\Mail\NewsletterMail;
 use App\Models\Newsletter;
 use App\Models\Panier;
@@ -87,16 +88,22 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'panier_id'=> $panier->id
         ]);
+        $panier->user_id = $user->id;
+        $panier->save();
+        Mail::to($user->email)->send(new Confirmation);
        }
        elseif ($request->image) {
         $panier = new Panier();
         $user = User::create([
             'username' => $request->username,
-            'image' => $request->image,
+            'image' => $request->username.'.jpg',
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'panier_id'=> $panier->id
         ]);
+        $panier->user_id = $user->id;
+        $panier->save();
+        Mail::to($user->email)->send(new Confirmation);
        }
 
        if ($request->newsletter && Newsletter::all()->where('email',$request->email)->count() == 0 ) {

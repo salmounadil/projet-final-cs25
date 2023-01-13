@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('nom');
             $table->string('image');
-            $table->integer('idproduit')->constrained();
+            $table->foreignId('produit_id')->constrained();
             $table->integer('prixfinal');
             $table->integer('prixtotal');
             $table->integer('quantité');

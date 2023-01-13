@@ -15,47 +15,34 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/">Home</a>
                             </li>
+                            @can('admin-access')
+                            <li class="nav-item">
+                                <a class="nav-link" href="/users">Users</a>
+                            </li>
+                            @endcan
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
                                     role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Shop
+                                    MailBox
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                    <a class="dropdown-item" href="/category"> shop category</a>                                    
+                                    <a class="dropdown-item" href="/backoffice/mailbox/contacts">Contacts</a>                                    
+                                    <a class="dropdown-item" href="/backoffice/mailbox/archives">Archives</a>                                    
                                 </div>
                             </li>
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_2"
-                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    blog
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                    <a class="dropdown-item" href="/blog"> blog</a>
-                                </div>
-                            </li>
-                            
+ 
                             <li class="nav-item">
-                                <a class="nav-link" href="/contact">Contact</a>
+                                <a class="nav-link" href="/users">Blogs</a>
                             </li>
-                            @can('backoffice-access')
-                                <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-primary" href="/backoffice" id="navbarDropdown_2 "
-                                    role="button" aria-haspopup="true" aria-expanded="false">
-                                    Backoffice
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                    <a class="dropdown-item" href="/backoffice"> Item</a>
-                                </div>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/contact">Likes</a>
                             </li>
-                            @endcan
-                            
                         </ul>
                     </div>
                     <div class="hearer_icon d-flex">
                         @if (Auth::check())
                         <div class="dropdown">
-                            <img class="rounded-circle" src="{{ Auth::user()->imageFile ? asset('storage/'.Auth::user()->imageFile) : asset('storage/'.Auth::user()->image)  }}" alt="">
+                            <img class="rounded-circle" src="{{ Auth::user()->imageFile ? asset('storage/'.Auth::user()->imageFile) : asset('storage/'.Auth::user()->username.'.jpg')  }}" alt="">
                             <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                               {{ Auth::user()->username }}
                             </button>

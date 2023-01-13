@@ -29,7 +29,7 @@
                                                         <form action="/panier" method="POST">
                                                             @csrf
                                                             <input type="hidden" name="id" value="{{ $produits[$nbr]->id }}">
-                                                            <input type="submit" class="add_cart" value="add to cart">
+                                                            <input type="submit" class="add_carte" value="add to cart">
                                                         </form>
                                                     
                                                     <a href="" class="add_cart"><i class="ti-heart"></i></a>

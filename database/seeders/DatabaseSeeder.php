@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
             BlogSeeder::class,
             TagSeeder::class,
             BlogTagSeeder::class,
+            MapSeeder::class
         ]);
     }
 }

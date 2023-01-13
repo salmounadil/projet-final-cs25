@@ -2902,6 +2902,10 @@ ul {
   opacity: 1;
   visibility: visible;
 }
+.single_product_item:hover .add_carte {
+  opacity: 1;
+  visibility: visible;
+}
 
 /************* our offer *****************/
 /* line 2, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_our_offer.scss */
@@ -7774,6 +7778,51 @@ h6 {
   justify-content: center;
   align-items: center;
 }
+.buynow{
+  border: none;
+}
+
+#myMap{
+  /* z-index: 3;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  padding: 0px;
+  border-width: 0px;
+  margin: 0px;
+  left: 0px;
+  top: 0px;
+  touch-action: pan-x pan-y; */
+  filter: saturate(0) !important;
+  filter: brightness(75);
+}
+
+.add_carte{
+  border: none;
+  background-color: white;
+  text-transform: uppercase;
+  color: #ff3368;
+  color: #ff3368;
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: 500;
+  display: block;
+  margin-top: 10px;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+#contact{
+  cursor: pointer;
+}
+
+.message{
+  width: 50vw !important;
+}
+
+
 
 
 /*# sourceMappingURL=style.css.map */

@@ -21,7 +21,9 @@
                         @foreach ($blogs as $blog )
                             <article class="blog_item">
                             <div class="blog_item_img">
+                                <a class="d-inline-block" href="/blog/{{ $blog->id }}">
                                 <img class="card-img rounded-0" src="{{ asset('storage/blog/'.$blog->image) }}" alt="">
+                                </a>
                                 <a href="#" class="blog_item_date">
                                     <h3>{{$blog->dateJ  }}</h3>
                                     <p>{{ $blog->dateM }}</p>
@@ -96,7 +98,9 @@
                             <h3 class="widget_title">Recent Post</h3>
                             @foreach ($recentBlogs as $blog )
                                <div class="media post_item">
+                                <a href="/blog/{{ $blog->id }}">
                                 <img src="{{ asset('storage/recentPost/'.$blog->image) }}" alt="post">
+                                </a>
                                 <div class="media-body">
                                     <a href="/blog/{{ $blog->id }}">
                                         @if ( Str::length($blog->titre)>20) 

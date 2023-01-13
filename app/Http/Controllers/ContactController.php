@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\Contact as MailContact;
 use App\Models\Contact;
+use App\Models\Map;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -14,7 +17,8 @@ class ContactController extends Controller
      */
     public function index()
     {
-        return view('pages.frontend.contact');
+        $map = Map::all()[0];
+        return view('pages.frontend.contact',compact('map'));
     }
 
     /**
@@ -35,7 +39,22 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            "nom"=> ["required"],
+            "email"=> ["required","email"],
+            "sujet"=> ["required"],
+            "message"=> ["required"],
+        ]);
+        $store = new Contact();
+        $store->message = $request->message;
+        $store->nom = $request->nom;
+        $store->email = $request->email;
+        $store->sujet = $request->sujet;
+        $store->save();
+        $contact = $store;
+        Mail::to('salmoun.adil93@gmail.com')->send(new MailContact($contact));
+        return redirect()->back()->with('success','Votre Mail a bien été envoyé, nous vous recontacterons dans les plus brefs délais.');
+
     }
 
     /**
@@ -45,8 +64,10 @@ class ContactController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Contact $contact)
-    {
-        //
+    {   $show = $contact;
+        $show->vu = true ;
+        $show->save();
+        return view('pages.backend.showMail',compact('show'));
     }
 
     /**
@@ -59,6 +80,7 @@ class ContactController extends Controller
     {
         //
     }
+
 
     /**
      * Update the specified resource in storage.

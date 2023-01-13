@@ -17,4 +17,7 @@ class Produit extends Model
     public function categorie(){
         return $this->belongsTo(Categorie::class);
     }
+    public function produitpanier(){
+        return $this->belongsTo(Produitpanier::class);
+    }
 }

@@ -77,7 +77,7 @@
                     </div>
 
                     <div class="row align-items-center latest_product_inner">
-                        @foreach ($produitsPagi as $produit)
+                        @foreach ($produits as $produit)
                             <div class="col-lg-4 col-sm-6">
                             <div class="single_product_item">
                                 @if ($produit->image)
@@ -95,20 +95,28 @@
                                     @endif
                                     @auth
                                     <div class="d-flex align-items-center justify-content-between">
-                                   <a href="" class="add_cart">+ add to cart</a>
+                                       <form action="/panier" method="POST">
+                                           @csrf
+                                           <input type="hidden" name="id" value="{{ $produit->id }}">
+                                           <input type="submit" class="add_carte" value="add to cart">
+                                       </form>
+                                   
                                    <a href="" class="add_cart"><i class="ti-heart"></i></a>
                                </div>
-                               @endauth                                </div>
+                               @endauth                               </div>
                             </div>
                         </div>
                         @endforeach
-                        <div class="col-lg-12">
+                        @if (request()->routeIs('category'))
+                            <div class="col-lg-12">
                             <div class="pageination">
                                 <nav aria-label="Page navigation example">
-                                    {{ $produitsPagi->links('partials.frontend.pagination') }}
+                                    {{ $produits->links('partials.frontend.pagination') }}
                                 </nav>
                             </div>
                         </div>
+                        @endif
+                        
                     </div>
                 </div>
             </div>
