@@ -20,4 +20,7 @@ class Produit extends Model
     public function produitpanier(){
         return $this->belongsTo(Produitpanier::class);
     }
+    public function users(){
+        return $this->belongsToMany(User::class,'produit_users');
+    }
 }

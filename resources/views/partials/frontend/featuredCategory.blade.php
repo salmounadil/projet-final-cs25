@@ -12,26 +12,32 @@
                 <div class="single_feature_post_text">
                     <p>Premium Quality</p>
                     <h3>{{ $produits[$produits->count()-1]->nom}}</h3>
-                    <a href="/produit/{{$produits[$produits->count()-1]->id}}" class="feature_btn">EXPLORE NOW <i class="fas fa-play"></i></a>                    <img src="img/feature1/{{ $produits[$produits->count()-1]->image}}.png" alt="">                </div>
+                    <a href="/produit/{{$produits[$produits->count()-1]->id}}" class="feature_btn">EXPLORE NOW <i class="fas fa-play"></i></a>                    
+                    <img src="{{ $produits[$produits->count()-1]->image ? asset('storage/feature1/'.$produits[$produits->count()-1]->image) : asset('storage/feature1/'.$produits[$produits->count()-1]->imageFile)  }}" alt="">                
+                </div>
             </div>
             <div class="col-lg-5 col-sm-6">
                 <div class="single_feature_post_text">
                     <p>Premium Quality</p>
                     <h3>{{ $produits[$produits->count()-2]->nom}}</h3>
-                    <a href="/produit/{{$produits[$produits->count()-2]->id}}" class="feature_btn">EXPLORE NOW <i class="fas fa-play"></i></a>                    <img src="img/feature2/{{ $produits[$produits->count()-2]->image}}.png" alt="">                </div>
+                    <a href="/produit/{{$produits[$produits->count()-2]->id}}" class="feature_btn">EXPLORE NOW <i class="fas fa-play"></i></a>                    
+                    <img src="{{ $produits[$produits->count()-2]->image ? asset('storage/feature2/'.$produits[$produits->count()-2]->image) : asset('storage/feature2/'.$produits[$produits->count()-2]->imageFile)  }}" alt="">                
+                </div>
             </div>
             <div class="col-lg-5 col-sm-6">
                 <div class="single_feature_post_text">
                     <p>Premium Quality</p>
                     <h3>{{ $produits[$produits->count()-3]->nom}}</h3>
-                    <a href="/produit/{{$produits[$produits->count()-3]->id}}" class="feature_btn">EXPLORE NOW <i class="fas fa-play"></i></a>                    <img src="img/feature2/{{ $produits[$produits->count()-3]->image}}.png" alt="">                </div>
+                    <a href="/produit/{{$produits[$produits->count()-3]->id}}" class="feature_btn">EXPLORE NOW <i class="fas fa-play"></i></a>                    
+                    <img src="{{ $produits[$produits->count()-3]->image ? asset('storage/feature2/'.$produits[$produits->count()-3]->image) : asset('storage/feature2/'.$produits[$produits->count()-3]->imageFile)  }}" alt="">                
+                </div>
             </div>
             <div class="col-lg-7 col-sm-6">
                 <div class="single_feature_post_text">
                     <p>Premium Quality</p>
                     <h3>{{ $produits[$produits->count()-4]->nom}}</h3>
                     <a href="/produit/{{$produits[$produits->count()-4]->id}}" class="feature_btn">EXPLORE NOW <i class="fas fa-play"></i></a>
-                    <img src="img/feature1/{{ $produits[$produits->count()-4]->image}}.png" alt="">
+                    <img src="{{ $produits[$produits->count()-4]->image ? asset('storage/feature1/'.$produits[$produits->count()-4]->image) : asset('storage/feature1/'.$produits[$produits->count()-4]->imageFile)  }}" alt="">                
                 </div>
             </div>
         </div>

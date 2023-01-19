@@ -6,7 +6,9 @@ use App\Http\Controllers\ComblogController;
 use App\Http\Controllers\CommentaireController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PanierController;
 use App\Http\Controllers\ProduitController;
 use App\Http\Controllers\ProfileController;
@@ -30,6 +32,7 @@ use Intervention\Image\Facades\Image;
 */
 
 Route::get('/', [HomeController::class,'home'])->name('home');
+Route::get('/likes', [HomeController::class,'like']);
 Route::get('/backoffice', [BackofficeController::class,'backoffice']);
 Route::get('/backoffice/mailbox/contacts', [BackofficeController::class,'mailbox']);
 Route::get('/backoffice/mailbox/archives', [BackofficeController::class,'archives']);
@@ -41,8 +44,20 @@ Route::get('/tags/{id}', [BlogController::class,'filterByTags']);
 Route::get('/blog/search', [BlogController::class,'filterBySearch']);
 Route::get('/blogs/category/{id}', [BlogController::class,'filterByCategory']);
 Route::get('/panier/checkout', [PanierController::class,'checkout']);
+Route::get('/order/tracking', [OrderController::class,'index']);
+Route::get('/order/tracking/search', [OrderController::class,'show']);
+Route::post('/orders/validate/{id}', [OrderController::class,'confirm']);
+Route::get('/orders', [OrderController::class,'orders']);
+Route::delete('/order/delete/{id}', [OrderController::class,'destroy']);
 Route::post('/panier/quantité', [PanierController::class,'quantité']);
 Route::post('/panier/add', [PanierController::class,'addToPanier']);
+Route::post('/checkout/coupon', [PanierController::class,'coupon']);
+Route::post('/panier/checkout/confirmation', [PanierController::class,'payer']);
+Route::post('/contact/archive/{id}', [ContactController::class,'archive']);
+Route::post('/produit/like', [LikeController::class,'like']);
+Route::get('/backoffice/produits', [LikeController::class,'index']);
+Route::get('/backoffice/mailbox/reponse/{id}', [MailController::class,'reponse']);
+Route::post('/backoffice/mailbox/reponse', [MailController::class,'mailReponse']);
 
 
 

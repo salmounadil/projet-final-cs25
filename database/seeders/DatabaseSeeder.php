@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Coupon;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -31,7 +33,8 @@ class DatabaseSeeder extends Seeder
             BlogSeeder::class,
             TagSeeder::class,
             BlogTagSeeder::class,
-            MapSeeder::class
+            MapSeeder::class,
+            CouponSeeder::class
         ]);
     }
 }

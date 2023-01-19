@@ -20,12 +20,9 @@
         <div class="container">
           <div class="d-none d-sm-block mb-5 pb-4">
                         <iframe id="myMap" src="https://maps.google.com/maps?&q={{str_replace(" ","+", $map->adresse .$map->codepostal .$map->ville  )  }}&output=embed" frameborder="0" style="border:0; width: 100%; height: 480px;" allowfullscreen></iframe>
-
-    
           </div>
-    
-    
           <div class="row">
+            
             <div class="col-12">
               <h2 class="contact-title">Get in Touch</h2>
             </div>

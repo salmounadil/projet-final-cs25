@@ -20,6 +20,21 @@
                                 <a class="nav-link" href="/users">Users</a>
                             </li>
                             @endcan
+                            <li class="nav-item">
+                                <a class="nav-link" href="/orders">Orders</a>
+                            </li>
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
+                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Products
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
+                                    <a class="dropdown-item" href="/produit/create">New Product</a>                                    
+                                    <a class="dropdown-item" href="/backoffice/produits">All Products</a>                                    
+                                    <a class="dropdown-item" href="/backoffice/produits#likedProducts">Liked Products</a>                                    
+                                </div>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
                                     role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -34,9 +49,7 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/users">Blogs</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/contact">Likes</a>
-                            </li>
+
                         </ul>
                     </div>
                     <div class="hearer_icon d-flex">
@@ -54,10 +67,14 @@
                                 </form>
                             </ul>
                           </div>
-                          <div class="dropdown cart d-flex align-items-center position-relative">
+                          <div class="dropdown cart droppp d-flex align-items-center position-relative">
+                            <a class="dropdown-toggle mr-2" href="/likes" id="navbarDropdown3" role="button"
+                            aria-haspopup="true" >
+                           <i class=" fa-solid fa-heart"></i>
+                           <div class="panierr">{{ Auth::user()->produits->count() }}</div>
                             <a class="dropdown-toggle mr-2" href="/panier" id="navbarDropdown3" role="button"
                                  aria-haspopup="true" >
-                                <i class="fas fa-cart-plus"></i>
+                                <i class="fas fa-cart-plus"></i></a>
                             </a>
                             <div class="panier">{{ Auth::user()->panier->produitsPanier->count() }}</div>
                             <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">

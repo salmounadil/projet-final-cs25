@@ -57,4 +57,7 @@ class User extends Authenticatable
     public function panier(){
         return $this->hasOne(Panier::class);
     }
+    public function produits(){
+        return $this->belongsToMany(Produit::class,'produit_users');
+    }
 }

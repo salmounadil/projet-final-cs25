@@ -1,10 +1,10 @@
-<section class="cart_area padding_top">
-    <h1 class="text-center pb-5 mb-5">Archives Mails</h1>
+<section class="cart_area padding_top bannerback">
     <div class="container">
         <div class="cart_inner">
             <div class="table-responsive">
-                <table class="table">
+                <table class="table bg-white tableau">
                     <thead>
+                        <h1 class="text-center bg-white p-3">Archives Mails</h1>
                         <tr>
                             <th scope="col">Name</th>
                             <th scope="col">Email</th>
@@ -14,7 +14,7 @@
                     <tbody>
                         @foreach ($contacts as $contact)
                         @if ($contact->archive)
-                            <tr id="contact" class="{{ $contact->vu ? '' : 'bg-secondary text-white' }}">
+                            <tr id="contact" class="{{ $contact->vu ? 'bg-white' : 'bg-secondary text-white' }}">
                                     <td>
                                         <h5 class="{{ $contact->vu ? '' : ' text-white' }}">{{ $contact->nom }}</h5>
                                     </td>
@@ -29,12 +29,13 @@
                                         <h5 class="{{ $contact->vu ? '' : ' text-white' }}">{{ $contact->sujet }}</h5>
                                     </td>
                                     <td>
-                                        <form action="contact/{{ $contact->id }}" method="GET">
+                                        <form action="/contact/{{ $contact->id }}" method="GET">
                                             <button type="submit" class="btn bg-success text-white" value="Ouvrir">Ouvrir</button>
                                         </form>
                                     </td>
                                     <td>
-                                        <form action="contact/{{ $contact->id }}" method="POST">
+                                        <form action="/contact/{{ $contact->id }}" method="POST">
+                                            @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn bg-danger text-white" value="Ouvrir">Supprimer</button>
                                         </form>

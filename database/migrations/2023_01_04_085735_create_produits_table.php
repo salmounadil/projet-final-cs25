@@ -20,10 +20,10 @@ return new class extends Migration
             $table->foreignId('couleur_id')->constrained();
             $table->string('image')->nullable();
             $table->string('imageFile')->nullable();
-            $table->integer('prix');
-            $table->integer('promo')->default(0);
-            $table->integer('prixfinal');
-            $table->integer('stock');
+            $table->double('prix');
+            $table->double('promo')->default(0);
+            $table->double('prixfinal');
+            $table->double('stock');
             $table->text('description');
             $table->timestamps();
         });

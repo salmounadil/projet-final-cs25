@@ -15,8 +15,10 @@
                             <div class="single_product_item">
                         <a href="/produit/{{ $produit->id }}"><img src="{{ asset('/img/awesome/'.$produit->image.'.png') }}" alt=""></a>
                         <div class="single_product_text">
-                            <h4>{{ $produit->nom }}</h4>
-                            <h3 ><span style="{{($produit->promo > 0) ? 'text-decoration:line-through;' : null  }}">${{ $produit->prix }}.00</span>@if ($produit->promo > 0)
+                            <h4 id="test">{{ $produit->nom }}</h4>
+                            <form action="/produit/{{ $produit->id }}" method="get">
+                            </form>
+                            <h3 ><span style="{{($produit->promo > 0) ? 'text-decoration:line-through;' : null  }}">${{ $produit->prix }}</span>@if ($produit->promo > 0)
                                 <span class="text-danger">${{ $produit->prixfinal }}         (-{{ $produit->promo }}%)</span>
                             @endif
                         </h3>
@@ -29,4 +31,13 @@
             </div>
         </div>
     </div>
+    <script>
+                        
+        document.querySelectorAll('#test').forEach(element => {
+            element.addEventListener('click',()=>{
+               element.nextElementSibling.submit();
+                
+            })
+        });
+        </script>
 </section>

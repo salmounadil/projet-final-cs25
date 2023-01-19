@@ -1,9 +1,10 @@
-<section class="cart_area padding_top">
+<section class="cart_area padding_top bannerback">
 <div class="container">
     <div class="cart_inner">
         <div class="table-responsive">
-            <table class="table">
+            <table class="table bg-white tableau">
                 <thead>
+                        <h1 class="text-center bg-white p-3">Users</h1>
                     <tr>
                         <th scope="col">Image</th>
                         <th scope="col">Username</th>

@@ -56,19 +56,27 @@
                     <p>
                         {{ $produit->description }}
                     </p>
-                    <div class="card_area d-flex justify-content-between align-items-center">
+                    @auth
+                        <div class="card_area d-flex justify-content-between align-items-center">
                         <div class="product_count">
                             <form action="/panier/add"  method="POST">
                                 @csrf
                                 <span class="inumber-decrement"> <i class="ti-minus"></i></span>
-                                <input class="input-number" type="number" name="quantité" value="1" min="0" max="{{ $produit->stock }}">
+                                {{-- {{ Auth::user()->panier->produitsPanier->count() }} --}}
+                                <input class="input-number" type="number" name="quantité" value="{{ Auth::user()->panier->produitsPanier->where('produit_id',$produit->id)->count() > 0 ? Auth::user()->panier->produitsPanier->where('produit_id',$produit->id)->first()->quantité : ($produit->stock > 0 ? 1 : 0) }}" min="0" max="{{ $produit->stock }}">
                                 <span class="number-increment"> <i class="ti-plus"></i></span>
                                 <input type="hidden" name="idd" value="{{ $produit->id }}">
                                                         </div>
                                                         <input type="submit" value="add to cart" class="btn_3">
                             </form>
-                        <a href="#" class="like_us"> <i class="ti-heart"></i> </a>
+                        <a id="like" class="like_us"> <i class=" {{ Auth::user()->produits->where('id',$produit->id)->count() > 0 ? "fa-solid fa-heart text-danger" : "fa-regular fa-heart " }}  "></i> </a>
+                        <form action="/produit/like" method="POST">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $produit->id }}">
+                        </form>
                     </div>
+                    @endauth
+                    
                 </div>
             </div>
         </div>
@@ -260,6 +268,14 @@
             </div>
         </div>
     </div>
+    <script>
+            document.querySelectorAll('#like').forEach(element => {
+                            element.addEventListener('click',()=>{
+                               element.nextElementSibling.submit();
+                                
+                            })
+                        });
+    </script>
 </section>
 <!--================End Product Description Area =================-->
 <!-- product_list part start-->

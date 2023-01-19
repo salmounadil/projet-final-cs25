@@ -36,6 +36,9 @@
                             </li>
                             
                             <li class="nav-item">
+                                <a class="nav-link" href="/order/tracking">Tracking</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="/contact">Contact</a>
                             </li>
                             @can('backoffice-access')
@@ -68,6 +71,11 @@
                             </ul>
                           </div>
                           <div class="dropdown cart d-flex align-items-center position-relative">
+                                 <a class="dropdown-toggle mr-2" href="/likes" id="navbarDropdown3" role="button"
+                            aria-haspopup="true" >
+                           <i class=" fa-solid fa-heart"></i>
+                           <div class="panierr">{{ Auth::user()->produits->count() }}</div>
+                       </a>
                             <a class="dropdown-toggle mr-2" href="/panier" id="navbarDropdown3" role="button"
                                  aria-haspopup="true" >
                                 <i class="fas fa-cart-plus"></i>
@@ -78,6 +86,7 @@
 
                                 </div>
                             </div> -->
+                       
                             
                         </div>
                         @else

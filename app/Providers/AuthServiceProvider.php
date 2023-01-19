@@ -33,5 +33,8 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('admin-access', function($user) {
             return $user->role_id == 1  ;
         });
+        Gate::define('panier-full', function($user) {
+            return $user->panier->produitsPanier->count() > 0;
+        });
     }
 }

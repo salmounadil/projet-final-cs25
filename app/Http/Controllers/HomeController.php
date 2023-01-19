@@ -8,6 +8,7 @@ use App\Models\Couleur;
 use App\Models\Produit;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -56,6 +57,11 @@ class HomeController extends Controller
         }
         $produits = Produit::where('nom','LIKE',"%$request->recherche%")->orWhere('categorie_id','LIKE',$categoryID)->get();
         return view('pages.frontend.shopCategory',compact('produits','produitsBest','categories','couleurs','couleur'));
+    }
+
+    public function like(){
+        $produits = Auth::user()->produits;
+        return view('pages.frontend.like',compact('produits'));
     }
 
   

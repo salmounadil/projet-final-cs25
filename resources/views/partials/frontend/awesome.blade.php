@@ -19,8 +19,10 @@
                                         <div class="single_product_item">
                                             <a href="/produit/{{ $produits[$nbr]->id }}"><img src="img/awesome/{{ $produits[$nbr]->image }}.png" alt=""></a>
                                             <div class="single_product_text">
-                                                <h4 >{{ $produits[$nbr]->nom }}</h4>
-                                                <h3 ><span style="{{($produits[$nbr]->promo > 0) ? 'text-decoration:line-through;' : null  }}">${{ $produits[$nbr]->prix }}.00</span>@if ($produits[$nbr]->promo > 0)
+                                                <h4 id="test">{{ $produits[$nbr]->nom }}</h4>
+                                                <form action="/produit/{{ $produits[$nbr]->id }}" method="get">
+                                                </form>
+                                                <h3 ><span style="{{($produits[$nbr]->promo > 0) ? 'text-decoration:line-through;' : null  }}">${{ $produits[$nbr]->prix }}</span>@if ($produits[$nbr]->promo > 0)
                                                         <span class="text-danger">${{ $produits[$nbr]->prixfinal}}      (-{{ $produits[$nbr]->promo }}%)</span>
                                                     @endif
                                                 </h3>
@@ -32,7 +34,11 @@
                                                             <input type="submit" class="add_carte" value="add to cart">
                                                         </form>
                                                     
-                                                    <a href="" class="add_cart"><i class="ti-heart"></i></a>
+                                                    <a id="like" class="add_cart"><i class=" {{ Auth::user()->produits->where('id',$produits[$nbr]->id)->count() > 0 ? "fa-solid fa-heart text-danger" : "fa-regular fa-heart " }}  "></i></a>
+                                                    <form action="/produit/like" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="id" value="{{ $produits[$nbr]->id }}">
+                                                    </form>
                                                 </div>
                                                 @endauth
                                             </div>
@@ -44,7 +50,21 @@
                             </div>
                         </div>
                     @endfor
-
+                        <script>
+                        
+                        document.querySelectorAll('#test').forEach(element => {
+                            element.addEventListener('click',()=>{
+                               element.nextElementSibling.submit();
+                                
+                            })
+                        });
+                        document.querySelectorAll('#like').forEach(element => {
+                            element.addEventListener('click',()=>{
+                               element.nextElementSibling.submit();
+                                
+                            })
+                        });
+                        </script>
                 </div>
             </div>
         </div>

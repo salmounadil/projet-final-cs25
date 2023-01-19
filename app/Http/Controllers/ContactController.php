@@ -70,6 +70,13 @@ class ContactController extends Controller
         return view('pages.backend.showMail',compact('show'));
     }
 
+    public function archive(Request $request){
+        $contact = Contact::find($request->id);
+        $contact->archive = true;
+        $contact->save();
+        return redirect()->back()->with('success','Mail Contact ajouté aux archives');
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -102,6 +109,7 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
-        //
+        $contact->delete();
+        return redirect()->back()->with('success','Mail Contact supprimé');
     }
 }

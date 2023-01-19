@@ -46,6 +46,8 @@
     @include('partials.backend.header')
     @yield('content')
     @include('partials.frontend.footer')
+    <script src="https://kit.fontawesome.com/ce588dcfbf.js" crossorigin="anonymous"></script>
+
     <script src="{{ asset('js/jquery-1.12.1.min.js') }}"></script>
     <!-- popper js -->
     <script src="{{ asset('js/popper.min.js') }}"></script>
@@ -60,7 +62,7 @@
     <script src="{{ asset('js/masonry.pkgd.js') }}"></script>
     <!-- particles js -->
     <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script>
+    {{-- <script src="{{ asset('js/jquery.nice-select.min.js') }}"></script> --}}
     <!-- slick js -->
     <script src="{{ asset('js/slick.min.js') }}"></script>
     <script src="{{ asset('js/jquery.counterup.min.js') }}"></script>

@@ -28,7 +28,7 @@
                                 </div>
                             </div>
                             <div class="banner_img d-none d-lg-block">
-                                <img src="img/section1/{{ $produits[$rand1]->image }}.png" alt="">
+                                <img src="{{ $produits[$rand1]->image ? asset('storage/section1/'.$produits[$rand1]->image) : asset('storage/section1/'.$produits[$rand1]->imageFile)  }}" alt="">
                             </div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                                 </div>
                             </div>
                             <div class="banner_img d-none d-lg-block">
-                                <img src="img/section1/{{ $produits[$rand2]->image }}.png" alt="">
+                                <img src="{{ $produits[$rand2]->image ? asset('storage/section1/'.$produits[$rand2]->image) : asset('storage/section1/'.$produits[$rand2]->imageFile)  }}" alt="">
                             </div>
                         </div>
                     </div>
@@ -74,7 +74,7 @@
                                 </div>
                             </div>
                             <div class="banner_img d-none d-lg-block">
-                                <img src="img/section1/{{ $produits[$rand3]->image }}.png" alt="">
+                                <img src="{{ $produits[$rand3]->image ? asset('storage/section1/'.$produits[$rand3]->image) : asset('storage/section1/'.$produits[$rand3]->imageFile)  }}" alt="">
                             </div>
                         </div>
                     </div>

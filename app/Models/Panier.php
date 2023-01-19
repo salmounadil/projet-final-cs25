@@ -14,4 +14,7 @@ class Panier extends Model
     public function produitsPanier(){
         return $this->hasMany(Produitpanier::class);
     }
+    public function coupon(){
+        return $this->belongsTo(Coupon::class);
+    }
 }

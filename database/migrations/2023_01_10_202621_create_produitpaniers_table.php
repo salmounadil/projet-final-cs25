@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('nom');
             $table->string('image');
             $table->foreignId('produit_id')->constrained();
-            $table->integer('prixfinal');
-            $table->integer('prixtotal');
-            $table->integer('quantité');
+            $table->double('prixfinal');
+            $table->double('prixtotal');
+            $table->double('quantité');
             $table->foreignId('panier_id')->constrained();
             $table->timestamps();
         });

@@ -87,10 +87,9 @@
                                 @endif
                                 
                                 <div class="single_product_text">
-                                   
-                                        <h4>{{ $produit->nom }}</h4>
-                                    
-                                    <h3 ><span style="{{($produit->promo > 0) ? 'text-decoration:line-through;' : null  }}">${{ $produit->prix }}.00</span>@if ($produit->promo > 0)
+                                        <h4 id="test">{{ $produit->nom }}</h4>
+                                        <form action="/produit/{{ $produit->id }}" method="get"></form>
+                                    <h3 ><span style="{{($produit->promo > 0) ? 'text-decoration:line-through;' : null  }}">${{ $produit->prix }}</span>@if ($produit->promo > 0)
                                         <span class="text-danger">${{ $produit->prixfinal}}        (-{{ $produit->promo }}%)</span>
                                     @endif
                                     @auth
@@ -101,7 +100,11 @@
                                            <input type="submit" class="add_carte" value="add to cart">
                                        </form>
                                    
-                                   <a href="" class="add_cart"><i class="ti-heart"></i></a>
+                                       <a id="like" class="add_cart"><i class=" {{ Auth::user()->produits->where('id',$produit->id)->count() > 0 ? "fa-solid fa-heart text-danger" : "fa-regular fa-heart " }}  "></i></a>
+                                       <form action="/produit/like" method="POST">
+                                           @csrf
+                                           <input type="hidden" name="id" value="{{ $produit->id }}">
+                                       </form>
                                </div>
                                @endauth                               </div>
                             </div>
@@ -121,5 +124,20 @@
                 </div>
             </div>
         </div>
+        <script>
+                        
+            document.querySelectorAll('#test').forEach(element => {
+                element.addEventListener('click',()=>{
+                   element.nextElementSibling.submit();
+                    
+                })
+            });
+            document.querySelectorAll('#like').forEach(element => {
+                            element.addEventListener('click',()=>{
+                               element.nextElementSibling.submit();
+                                
+                })
+            });
+            </script>
     </section>
     <!--================End Category Product Area =================-->
