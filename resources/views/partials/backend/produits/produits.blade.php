@@ -24,7 +24,7 @@
                                     </td>
                                     <td>
                                         <div class="product_count">
-                                            <img src="{{ asset('storage/panier/' . $produit->image . '.png') }}">
+                                            <img src="{{ $produit->image ?  asset('storage/panier/' . $produit->image) : asset('storage/panier/' . $produit->imageFile) }}">
                                         </div>
                                     </td>
                                     <td>
@@ -35,12 +35,12 @@
                                     <td>
                                         <p >{{ $produit->prix }}</p>
                                     </td>
-                                    <td><a href="" class="btn btn-warning">Edit</a></td>
+                                    <td><a href="/produit/{{ $produit->id }}/edit" class="btn btn-warning">Edit</a></td>
                                     <td>
                                         <form action="/produit/{{ $produit->id }}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn bg-danger text-white" value="Ouvrir">Supprimer</button>
+                                            <button type="submit" class="btn bg-danger text-white">Supprimer</button>
                                         </form>
                                     </td>
                                 
@@ -84,7 +84,7 @@
                                     </td>
                                     <td>
                                         <div class="product_count">
-                                            <img src="{{ asset('storage/panier/' . $produit->image . '.png') }}">
+                                            <img src="{{ $produit->image ?  asset('storage/panier/' . $produit->image) : asset('storage/panier/' . $produit->imageFile) }}">
                                         </div>
                                     </td>
                                     <td>

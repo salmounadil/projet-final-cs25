@@ -32,7 +32,7 @@
                                     <div class="media">
                                         <div class="d-flex">
                                             <a href="/produit/{{ $produit->produit_id }}">
-                                              <img src="{{ asset('storage/panier/' . $produit->image . '.png') }}"
+                                              <img src="{{ $produit->image ?  asset('storage/panier/' . $produit->image ) : asset('storage/panier/' . $produit->imageFile ) }}"
                                                   alt="" />
                                             </a>
                                         </div>

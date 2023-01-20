@@ -11,8 +11,11 @@
     <p>Vous semblez intéressé par le produit {{ $produit->nom }},</p>
     <p>voici plus de détails le concernant.</p>
     <p>Cordialement.</p>
-    <img src="{{ $message->embed('img/feature1/'.$produit->image.'.png') }}">
+    <img src="{{ $produit->image ? $message->embed('storage/feature1/'.$produit->image) : $message->embed('storage/feature1/'.$produit->imageFile)  }}">
      <h1>{{ $produit->nom}}</h1>
-     <p>${{ $produit->prix }}</p>
+     <h3 ><span style="{{($produit->promo > 0) ? 'text-decoration:line-through;' : null  }}">${{ $produit->prix }}</span>@if ($produit->promo > 0)
+        <span style="color: #ff3368">${{ $produit->prixfinal}}      (-{{ $produit->promo }}%)</span>
+    @endif
+</h3>
 </body>
 </html>

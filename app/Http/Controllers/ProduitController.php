@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Categorie;
 use App\Models\Commentaire;
 use App\Models\Couleur;
+use App\Models\Panier;
 use App\Models\Produit;
+use App\Models\Produitpanier;
+use App\Models\ProduitUser;
 use App\Models\User;
 use App\Rules\Aucun;
 use App\Rules\OneOf;
@@ -71,7 +74,7 @@ class ProduitController extends Controller
        } 
 
        else{
-    $request->validate([
+        $request->validate([
             "nom"=> ["required"],
             "categorie_id"=> ["required"],
             "couleur_id"=> ["required"],
@@ -116,7 +119,7 @@ class ProduitController extends Controller
 
         }
         elseif ($request->file('imageFile') == true) {
-            $image = Image::make($request->file('imageFile'))->resize(50, 50);
+            $image = Image::make($request->file('imageFile'))->resize(400, 400);
             Storage::disk('local')->put('public/feature1/'.$store->imageFile, $image->stream(), 'public');
             $image = Image::make($request->file('imageFile'))->resize(300, 300);
             Storage::disk('local')->put('public/feature2/'.$store->imageFile, $image->stream(), 'public');
@@ -154,7 +157,10 @@ class ProduitController extends Controller
      */
     public function edit(Produit $produit)
     {
-        //
+        $categories = Categorie::all();
+        $couleurs = Couleur::all();
+        $edit = $produit ;
+        return view('pages.backend.produits.edit',compact('edit','categories','couleurs'));
     }
 
     /**
@@ -166,7 +172,106 @@ class ProduitController extends Controller
      */
     public function update(Request $request, Produit $produit)
     {
-        //
+        
+        if ($request->image && $request->imageFile) {
+            $request->validate([
+                "nom"=> ["required"],
+                "categorie_id"=> ["required"],
+                "couleur_id"=> ["required"],
+                "prix"=> ["required","integer"],
+                "stock"=> ["required","integer"],
+                "description"=> ["required"],
+                "image" =>[ new OneOf()  ],
+                
+            ]);
+        }
+       elseif($request->image == false && $request->imageFile == false) {
+            $request->validate([
+                "nom"=> ["required"],
+                "categorie_id"=> ["required"],
+                "couleur_id"=> ["required"],
+                "prix"=> ["required","integer"],
+                "stock"=> ["required","integer"],
+                "description"=> ["required"],
+                "image" =>[ new Aucun()  ],
+            ]);
+       } 
+
+       else{
+        $request->validate([
+            "nom"=> ["required"],
+            "categorie_id"=> ["required"],
+            "couleur_id"=> ["required"],
+            "prix"=> ["required","integer"],
+            "stock"=> ["required","integer"],
+            "description"=> ["required"],
+        ]);
+
+       }
+       $produit->nom = $request->nom;
+        $produit->categorie_id = $request->categorie_id;
+        $produit->couleur_id = $request->couleur_id;
+
+        if ($produit->image) {
+            Storage::delete('public/feature1/'.$produit->image);
+            Storage::delete('public/feature2/'.$produit->image);
+            Storage::delete('public/section1/'.$produit->image);
+            Storage::delete('public/awesome/'.$produit->image);
+            Storage::delete('public/panier/'.$produit->image);
+        }
+        if ($produit->imageFile) {
+            Storage::delete('public/feature1/'.$produit->imageFile);
+            Storage::delete('public/feature2/'.$produit->imageFile);
+            Storage::delete('public/section1/'.$produit->imageFile);
+            Storage::delete('public/awesome/'.$produit->imageFile);
+            Storage::delete('public/panier/'.$produit->imageFile);
+        }
+
+
+        if ($request->image) {
+            $produit->image = $request->image;
+            $produit->imageFile = null;
+        }
+        if ($request->imageFile) {
+            $produit->imageFile = $request->file('imageFile')->hashname();
+            $produit->image = null;
+        }   
+        if ($request->image == true) {
+            $image = Image::make($request->image)->resize(400, 400);
+            $produit->image = time().'.jpg';
+            Storage::disk('local')->put('public/feature1/'.$produit->image, $image->stream(), 'public');
+            $image = Image::make($request->image)->resize(300, 300);
+            Storage::disk('local')->put('public/feature2/'.$produit->image, $image->stream(), 'public');
+            $image = Image::make($request->image)->resize(500, 500);
+            Storage::disk('local')->put('public/section1/'.$produit->image, $image->stream(), 'public');
+            $image = Image::make($request->image)->resize(263, 280);
+            Storage::disk('local')->put('public/awesome/'.$produit->image, $image->stream(), 'public');
+            $image = Image::make($request->image)->resize(145, 98);
+            Storage::disk('local')->put('public/panier/'.$produit->image, $image->stream(), 'public');
+
+
+        }
+        elseif ($request->file('imageFile') == true) {
+            $image = Image::make($request->file('imageFile'))->resize(400, 400);
+            Storage::disk('local')->put('public/feature1/'.$produit->imageFile, $image->stream(), 'public');
+            $image = Image::make($request->file('imageFile'))->resize(300, 300);
+            Storage::disk('local')->put('public/feature2/'.$produit->imageFile, $image->stream(), 'public');
+            $image = Image::make($request->file('imageFile'))->resize(500, 500);
+            Storage::disk('local')->put('public/section1/'.$produit->imageFile, $image->stream(), 'public');
+            $image = Image::make($request->file('imageFile'))->resize(263, 280);
+            Storage::disk('local')->put('public/awesome/'.$produit->imageFile, $image->stream(), 'public');
+            $image = Image::make($request->file('imageFile'))->resize(145, 98);
+            Storage::disk('local')->put('public/panier/'.$produit->imageFile, $image->stream(), 'public');
+        }
+        
+        $produit->prix = $request->prix;
+        $produit->promo = $request->promo;
+        $produit->stock = $request->stock;
+        $produit->prixfinal = ($produit->prix / 100) * (100 - $produit->promo);
+        $produit->description = $request->description;
+        $produit->save();
+        return redirect('/backoffice/produits')->with('success','Produit mis à jour');
+
     }
 
     /**
@@ -177,6 +282,39 @@ class ProduitController extends Controller
      */
     public function destroy(Produit $produit)
     {
+
+        if ($produit->image) {
+            Storage::delete('public/feature1/'.$produit->image);
+            Storage::delete('public/feature2/'.$produit->image);
+            Storage::delete('public/section1/'.$produit->image);
+            Storage::delete('public/awesome/'.$produit->image);
+            Storage::delete('public/panier/'.$produit->image);
+        }
+        if ($produit->imageFile) {
+            Storage::delete('public/feature1/'.$produit->imageFile);
+            Storage::delete('public/feature2/'.$produit->imageFile);
+            Storage::delete('public/section1/'.$produit->imageFile);
+            Storage::delete('public/awesome/'.$produit->imageFile);
+            Storage::delete('public/panier/'.$produit->imageFile);
+        }
+
+        if (ProduitUser::all()->where('produit_id',$produit->id)->count() > 0) {
+            foreach (ProduitUser::all()->where('produit_id',$produit->id) as $item) {
+            $item->delete();
+        }
+        }
+        if (Produitpanier::all()->where('produit_id',$produit->id)->count() > 0) {
+            $total = Produitpanier::all()->where('produit_id',$produit->id)->first()->prixtotal;
+            $ind = Produitpanier::all()->where('produit_id',$produit->id)->first()->panier_id ; 
+            $panier = Panier::find($ind);
+            $panier->paniertotal -= $total ;
+            $panier->save();
+            foreach (Produitpanier::all()->where('produit_id',$produit->id) as $item) {
+            $item->delete();
+        }
+        }
+        
+
         $produit->delete();
         return redirect()->back()->with('success','Produit supprimé');
     }

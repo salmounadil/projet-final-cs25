@@ -58,7 +58,7 @@
                     <div class="hearer_icon d-flex">
                         @if (Auth::check())
                         <div class="dropdown">
-                            <img class="rounded-circle" src="{{ Auth::user()->imageFile ? asset('storage/'.Auth::user()->imageFile) : asset('storage/'.Auth::user()->image)  }}" alt="">
+                            <img class="rounded-circle" src="{{ Auth::user()->image ? asset('storage/users/'.Auth::user()->image) : asset('storage/users/'.Auth::user()->imageFile) }}" alt="">
                             <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                               {{ Auth::user()->username }}
                             </button>

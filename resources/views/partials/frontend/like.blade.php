@@ -31,8 +31,8 @@
                             <div class="row align-items-center justify-content-between">
                                 @for ($j = 0; $j < 8 && $nbr < Auth::user()->produits->count(); $j++)
                                     <div href="/produit/{{ Auth::user()->produits[$nbr]->id }}" class="col-lg-3 col-sm-6">
-                                        <div class="single_product_item">
-                                            <a href="/produit/{{ Auth::user()->produits[$nbr]->id }}"><img src="img/awesome/{{ Auth::user()->produits[$nbr]->image }}.png" alt=""></a>
+                                        <div class="single_product_item" style="background-color: #fafafa">
+                                            <a href="/produit/{{ Auth::user()->produits[$nbr]->id }}"><img src="{{ Auth::user()->produits[$nbr]->image ? asset('storage/awesome/'.Auth::user()->produits[$nbr]->image) : asset('storage/awesome/'.Auth::user()->produits[$nbr]->imageFile) }}" alt=""></a>
                                             <div class="single_product_text">
                                                 <h4 id="test">{{ Auth::user()->produits[$nbr]->nom }}</h4>
                                                 <form action="/produit/{{ Auth::user()->produits[$nbr]->id }}" method="get">

@@ -7,7 +7,7 @@
                     @php
                         $rand = rand(0,$produits->count()-1)
                     @endphp
-                    <img src="img/section1/{{ $produits[$rand]->image }}.png" alt="">
+                    <img src="{{ $produits[$rand]->image ? asset('storage/section1/'.$produits[$rand]->image) : asset('storage/section1/'.$produits[$rand]->imageFile)  }}" alt="">
                 </div>
             </div>
             <div class="col-lg-6 col-md-6">

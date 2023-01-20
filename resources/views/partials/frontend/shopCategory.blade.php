@@ -79,12 +79,8 @@
                     <div class="row align-items-center latest_product_inner">
                         @foreach ($produits as $produit)
                             <div class="col-lg-4 col-sm-6">
-                            <div class="single_product_item">
-                                @if ($produit->image)
-                                    <a href="/produit/{{ $produit->id }}"><img src="{{ asset('/img/awesome/'.$produit->image.'.png') }}" alt=""></a>
-                                @else
-                                <a href="/produit/{{ $produit->id }}"><img src="{{ asset('/img/awesome/'.$produit->imageFile) }}" alt=""></a>
-                                @endif
+                            <div class="single_product_item" style="background-color: #fafafa">
+                                    <a href="/produit/{{ $produit->id }}"><img src="{{ $produit->image ?  asset('/storage/awesome/'.$produit->image) :  asset('/storage/awesome/'.$produit->imageFile) }}" alt=""></a>
                                 
                                 <div class="single_product_text">
                                         <h4 id="test">{{ $produit->nom }}</h4>

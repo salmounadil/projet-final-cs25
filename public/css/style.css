@@ -7786,7 +7786,7 @@ h6 {
   border-radius: 50%;
   position: absolute;
   top: 0;
-  right: 65px;
+  right: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7891,9 +7891,9 @@ h6 {
   cursor: pointer;
 }
 
-.droppp{
+/* .droppp{
   padding-top: 10px;
-}
+} */
 
 
 

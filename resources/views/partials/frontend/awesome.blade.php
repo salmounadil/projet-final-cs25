@@ -16,8 +16,8 @@
                             <div class="row align-items-center justify-content-between">
                                 @for ($j = 0; $j < 8 && $nbr < $produits->count(); $j++)
                                     <div href="/produit/{{ $produits[$nbr]->id }}" class="col-lg-3 col-sm-6">
-                                        <div class="single_product_item">
-                                            <a href="/produit/{{ $produits[$nbr]->id }}"><img src="img/awesome/{{ $produits[$nbr]->image }}.png" alt=""></a>
+                                        <div class="single_product_item " style="background-color: #fafafa">
+                                            <a href="/produit/{{ $produits[$nbr]->id }}"><img src="{{ $produits[$nbr]->image ? asset('storage/awesome/'.$produits[$nbr]->image) : asset('storage/awesome/'.$produits[$nbr]->imageFile) }}" alt=""></a>
                                             <div class="single_product_text">
                                                 <h4 id="test">{{ $produits[$nbr]->nom }}</h4>
                                                 <form action="/produit/{{ $produits[$nbr]->id }}" method="get">

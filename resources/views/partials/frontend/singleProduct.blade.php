@@ -22,17 +22,17 @@
             <div class="col-lg-7 col-xl-7">
                 <div class="product_slider_img">
                     <div id="vertical">
-                        <div data-thumb="{{ asset('img/feature1/' . $produit->image . '.png') }}">
-                            <img src="{{ asset('img/feature1/' . $produit->image . '.png') }}" />
+                        <div data-thumb="{{ $produit->image ? asset('storage/feature1/'.$produit->image) : asset('storage/feature1/'.$produit->imageFile ) }}">
+                            <img src="{{ $produit->image ? asset('storage/feature1/'.$produit->image) : asset('storage/feature1/'.$produit->imageFile ) }}" />
                         </div>
-                        <div data-thumb="{{ asset('img/feature1/' . $produit->image . '.png') }}">
-                            <img src="{{ asset('img/feature1/' . $produit->image . '.png') }}" />
+                        <div data-thumb="{{ $produit->image ? asset('storage/feature1/'.$produit->image) : asset('storage/feature1/'.$produit->imageFile ) }}">
+                            <img src="{{ $produit->image ? asset('storage/feature1/'.$produit->image) : asset('storage/feature1/'.$produit->imageFile ) }}" />
                         </div>
-                        <div data-thumb="{{ asset('img/feature1/' . $produit->image . '.png') }}">
-                            <img src="{{ asset('img/feature1/' . $produit->image . '.png') }}" />
+                        <div data-thumb="{{ $produit->image ? asset('storage/feature1/'.$produit->image) : asset('storage/feature1/'.$produit->imageFile ) }}">
+                            <img src="{{ $produit->image ? asset('storage/feature1/'.$produit->image) : asset('storage/feature1/'.$produit->imageFile ) }}" />
                         </div>
-                        <div data-thumb="{{ asset('img/feature1/' . $produit->image . '.png') }}">
-                            <img src="{{ asset('img/feature1/' . $produit->image . '.png') }}" />
+                        <div data-thumb="{{ $produit->image ? asset('storage/feature1/'.$produit->image) : asset('storage/feature1/'.$produit->imageFile ) }}">
+                            <img src="{{ $produit->image ? asset('storage/feature1/'.$produit->image) : asset('storage/feature1/'.$produit->imageFile ) }}" />
                         </div>
                     </div>
                 </div>
@@ -194,11 +194,11 @@
                                             @if ($users->where('email', $commentaire->email)->count() > 0)
                                                 @if ($commentaire->user->image == true)
                                                     <img class="rounded-circle"
-                                                        src="{{ asset('storage/' . $commentaire->user->image) }}"
+                                                        src="{{ asset('storage/users/' . $commentaire->user->image) }}"
                                                         alt="" />
                                                 @endif
                                                 @if ($commentaire->user->imageFile)
-                                                    <img class="rounded-circle" src="{{ asset('storage/' . $commentaire->user->imageFile) }}"
+                                                    <img class="rounded-circle" src="{{ asset('storage/users/' . $commentaire->user->imageFile) }}"
                                                         alt="" />
                                                 @endif   
                                                 @else

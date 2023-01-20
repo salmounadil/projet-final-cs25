@@ -22,7 +22,7 @@
                             <article class="blog_item">
                             <div class="blog_item_img">
                                 <a class="d-inline-block" href="/blog/{{ $blog->id }}">
-                                <img class="card-img rounded-0" src="{{ asset('storage/blog/'.$blog->image) }}" alt="">
+                                <img class="card-img rounded-0" src="{{ $blog->image ?  asset('storage/blog/'.$blog->image) :  asset('storage/blog/'.$blog->imageFile) }}" alt="">
                                 </a>
                                 <a href="#" class="blog_item_date">
                                     <h3>{{$blog->dateJ  }}</h3>
@@ -99,7 +99,7 @@
                             @foreach ($recentBlogs as $blog )
                                <div class="media post_item">
                                 <a href="/blog/{{ $blog->id }}">
-                                <img src="{{ asset('storage/recentPost/'.$blog->image) }}" alt="post">
+                                <img src="{{ $blog->image ?  asset('storage/recentPost/'.$blog->image) : asset('storage/recentPost/'.$blog->imageFile) }}" alt="post">
                                 </a>
                                 <div class="media-body">
                                     <a href="/blog/{{ $blog->id }}">

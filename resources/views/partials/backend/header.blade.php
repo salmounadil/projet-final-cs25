@@ -15,15 +15,21 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/">Home</a>
                             </li>
-                            @can('admin-access')
-                            <li class="nav-item">
-                                <a class="nav-link" href="/users">Users</a>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
+                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Datas
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
+                                    @can('admin-access')
+                                    <a class="dropdown-item" href="/users">Users</a>                                    
+                                    @endcan
+                                    <a class="dropdown-item" href="/orders">Orders</a>                                    
+                                    <a class="dropdown-item" href="/orders">Tags</a>                                    
+                                    <a class="dropdown-item" href="/orders">Categories</a>                                    
+                                    <a class="dropdown-item" href="/orders">Colors</a>                                    
+                                </div>
                             </li>
-                            @endcan
-                            <li class="nav-item">
-                                <a class="nav-link" href="/orders">Orders</a>
-                            </li>
-
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
                                     role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -34,6 +40,9 @@
                                     <a class="dropdown-item" href="/backoffice/produits">All Products</a>                                    
                                     <a class="dropdown-item" href="/backoffice/produits#likedProducts">Liked Products</a>                                    
                                 </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/users">Blogs</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
@@ -46,16 +55,13 @@
                                 </div>
                             </li>
  
-                            <li class="nav-item">
-                                <a class="nav-link" href="/users">Blogs</a>
-                            </li>
 
                         </ul>
                     </div>
                     <div class="hearer_icon d-flex">
                         @if (Auth::check())
                         <div class="dropdown">
-                            <img class="rounded-circle" src="{{ Auth::user()->imageFile ? asset('storage/'.Auth::user()->imageFile) : asset('storage/'.Auth::user()->username.'.jpg')  }}" alt="">
+                            <img class="rounded-circle" src="{{ Auth::user()->image ? asset('storage/users/'.Auth::user()->image) : asset('storage/users/'.Auth::user()->imageFile) }}" alt="">
                             <button class="btn  dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                               {{ Auth::user()->username }}
                             </button>
