@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('produits', function (Blueprint $table) {
             $table->id();
             $table->string('nom');
-            $table->foreignId('categorie_id')->constrained();
-            $table->foreignId('couleur_id')->constrained();
+            $table->foreignId('categorie_id')->nullable()->constrained();
+            $table->foreignId('couleur_id')->nullable()->constrained();
             $table->string('image')->nullable();
             $table->string('imageFile')->nullable();
             $table->double('prix');

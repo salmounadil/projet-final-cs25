@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Blog_Tag;
-use App\Models\Tag;
+use App\Models\Couleur;
+use App\Models\Produit;
 use Illuminate\Http\Request;
 
-class TagController extends Controller
+class ColorController extends Controller
 {
     public function __construct()
     {
@@ -18,9 +18,9 @@ class TagController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        $tags = Tag::all();
-        return view('pages.backend.tags.tags',compact('tags'));
+    {
+        $couleurs = Couleur::all();
+        return view('pages.backend.color.color',compact('couleurs'));
     }
 
     /**
@@ -30,7 +30,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('pages.backend.tags.store');
+        return view('pages.backend.color.store');
     }
 
     /**
@@ -41,22 +41,19 @@ class TagController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            "nom" => ["required"]
-        ]);
-        $store = new Tag();
-        $store->tag = $request->nom;
+        $store = new Couleur();
+        $store->couleur = $request->nom;
         $store->save();
-        return redirect('/tag')->with('success','Tag ajouté');
+        return redirect('/color')->with('success','Couleur ajoutée');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Tag  $tag
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Tag $tag)
+    public function show($id)
     {
         //
     }
@@ -64,10 +61,10 @@ class TagController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Tag  $tag
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tag $tag)
+    public function edit($id)
     {
         //
     }
@@ -76,10 +73,10 @@ class TagController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Tag  $tag
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tag $tag)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -87,16 +84,17 @@ class TagController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Tag  $tag
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tag $tag)
+    public function destroy($id)
     {
-        foreach (Blog_Tag::all()->where('tag_id',$tag->id) as $item) {
-            $item->delete();
+        foreach (Produit::all()->where('couleur_id',$id) as $prod) {
+            $prod->couleur_id = null;
+            $prod->save();
         }
-        $tag->delete();
-        return redirect('/tag')->with('success','Tag supprimé');
-
+        $color = Couleur::find($id);
+        $color->delete();
+        return redirect('/color')->with('success','Couleur supprimée');
     }
 }

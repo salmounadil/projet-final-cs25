@@ -10,8 +10,13 @@
                             <th scope="col">Image</th>
                             <th scope="col">Name</th>
                             <th scope="col">Prix</th>
+                            @can('admin-webmaster')
                             <th scope="col">Edit</th>
+
+                            @endcan
+                            @can('admin-access')
                             <th scope="col">Delete</th>
+                            @endcan
                         </tr>
                     </thead>
                     <tbody>
@@ -35,14 +40,19 @@
                                     <td>
                                         <p >{{ $produit->prix }}</p>
                                     </td>
+                                    @can('admin-webmaster')
                                     <td><a href="/produit/{{ $produit->id }}/edit" class="btn btn-warning">Edit</a></td>
-                                    <td>
+                                    @endcan
+                                    @can('admin-access')
+                                      <td>
                                         <form action="/produit/{{ $produit->id }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn bg-danger text-white">Supprimer</button>
                                         </form>
-                                    </td>
+                                    </td>  
+                                    @endcan
+                                    
                                 
                                     
                                 </tr>

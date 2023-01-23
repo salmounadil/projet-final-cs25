@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('blog_tag', function (Blueprint $table) {
+        Schema::create('blog__tags', function (Blueprint $table) {
             $table->id();
             $table->foreignId('blog_id')->constrained();
             $table->foreignId('tag_id')->constrained();
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('blog_tag');
+        Schema::dropIfExists('blog__tags');
     }
 };

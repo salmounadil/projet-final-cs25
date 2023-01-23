@@ -17,7 +17,9 @@
                                 @for ($j = 0; $j < 8 && $nbr < $produits->count(); $j++)
                                     <div href="/produit/{{ $produits[$nbr]->id }}" class="col-lg-3 col-sm-6">
                                         <div class="single_product_item " style="background-color: #fafafa">
-                                            <a href="/produit/{{ $produits[$nbr]->id }}"><img src="{{ $produits[$nbr]->image ? asset('storage/awesome/'.$produits[$nbr]->image) : asset('storage/awesome/'.$produits[$nbr]->imageFile) }}" alt=""></a>
+                                            <a href="/produit/{{ $produits[$nbr]->id }}">@if ($produits[$nbr]->stock == 0)
+                                                <div style="width: 263px; height:280px; position: absolute;display:flex;justify-content:center; align-items:center;opacity:0.9;"><p style="background-color: gray; width:100%; text-align:center;padding:20px 0px;font-size:20px;font-weight:bold;color:black;">Sold Out</p></div>
+                                            @endif<img src="{{ $produits[$nbr]->image ? asset('storage/awesome/'.$produits[$nbr]->image) : asset('storage/awesome/'.$produits[$nbr]->imageFile) }}" alt=""></a>
                                             <div class="single_product_text">
                                                 <h4 id="test">{{ $produits[$nbr]->nom }}</h4>
                                                 <form action="/produit/{{ $produits[$nbr]->id }}" method="get">

@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Blog_Tag;
-use App\Models\Tag;
+use App\Models\Blog;
+use App\Models\Categoryblog;
 use Illuminate\Http\Request;
 
-class TagController extends Controller
+class BlogCategorieController extends Controller
 {
+
     public function __construct()
     {
         $this->middleware('IsAdmin');
@@ -18,9 +19,9 @@ class TagController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        $tags = Tag::all();
-        return view('pages.backend.tags.tags',compact('tags'));
+    {
+        $blogcategory = Categoryblog::all();
+        return view('pages.backend.blogcategories.blogcategory',compact('blogcategory'));
     }
 
     /**
@@ -30,7 +31,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('pages.backend.tags.store');
+        return view('pages.backend.blogcategories.store');
     }
 
     /**
@@ -44,19 +45,19 @@ class TagController extends Controller
         $request->validate([
             "nom" => ["required"]
         ]);
-        $store = new Tag();
-        $store->tag = $request->nom;
+        $store = new Categoryblog();
+        $store->categorie = $request->nom;
         $store->save();
-        return redirect('/tag')->with('success','Tag ajouté');
+        return redirect('/blogcategory')->with('success','Blog Category ajouté');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Tag  $tag
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Tag $tag)
+    public function show($id)
     {
         //
     }
@@ -64,10 +65,10 @@ class TagController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Tag  $tag
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tag $tag)
+    public function edit($id)
     {
         //
     }
@@ -76,10 +77,10 @@ class TagController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Tag  $tag
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tag $tag)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -87,16 +88,18 @@ class TagController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Tag  $tag
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tag $tag)
+    public function destroy($id)
     {
-        foreach (Blog_Tag::all()->where('tag_id',$tag->id) as $item) {
-            $item->delete();
+        foreach (Blog::all()->where('categoryblog_id',$id) as $blog) {
+            $blog->categoryblog_id = null;
+            $blog->save();
         }
-        $tag->delete();
-        return redirect('/tag')->with('success','Tag supprimé');
+        $cat = Categoryblog::find($id);
+        $cat->delete();
+        return redirect('/blogcategory')->with('success','Blog Category supprimé');
 
     }
 }

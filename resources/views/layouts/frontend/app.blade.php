@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
     <!-- font awesome CSS -->
     <link rel="stylesheet" href="{{ asset('css/all.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/lightslider.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/lightslider.min.css') }}"> 
     <!-- flaticon CSS -->
     <link rel="stylesheet" href="{{ asset('css/flaticon.css') }}">
     <link rel="stylesheet" href="{{ asset('css/themify-icons.css') }}">

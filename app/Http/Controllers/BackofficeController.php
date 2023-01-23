@@ -9,7 +9,10 @@ class BackofficeController extends Controller
 {
     public function __construct(){
         $this->middleware('Backoffice')->only('backoffice');
+        $this->middleware('IsAdmin')->only('mailbox','archives');
+
     }
+  
 
     public function backoffice (){
         

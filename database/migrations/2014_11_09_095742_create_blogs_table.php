@@ -22,7 +22,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->string('titre');
             $table->text('texte');
-            $table->foreignId('categoryblog_id')->constrained();
+            $table->boolean('confirmation')->default(false);
+            $table->foreignId('categoryblog_id')->nullable()->constrained();
             $table->timestamps();
         });
     }

@@ -36,5 +36,14 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('panier-full', function($user) {
             return $user->panier->produitsPanier->count() > 0;
         });
+        Gate::define('blog-confirm', function($user) {
+            return $user->role_id == 1 || $user->role_id == 2;
+        });
+        Gate::define('admin-webmaster', function($user) {
+            return $user->role_id == 1 || $user->role_id == 3;
+        });
+        Gate::define('blog-redac', function($user,$blog) {
+            return $user->role_id == 1 || ($user->role_id == 2 && ($blog->user_id == $user->id || $blog->user_id == 3)) || ($user->role_id == 3 && $blog->user_id == $user->id) ;
+        });
     }
 }

@@ -15,37 +15,48 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/">Home</a>
                             </li>
+                            @can('admin-access')
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown_1"
                                     role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Datas
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                    @can('admin-access')
                                     <a class="dropdown-item" href="/users">Users</a>                                    
-                                    @endcan
                                     <a class="dropdown-item" href="/orders">Orders</a>                                    
-                                    <a class="dropdown-item" href="/orders">Tags</a>                                    
-                                    <a class="dropdown-item" href="/orders">Categories</a>                                    
-                                    <a class="dropdown-item" href="/orders">Colors</a>                                    
+                                    <a class="dropdown-item" href="/tag">Blogs Tags</a>                                    
+                                    <a class="dropdown-item" href="/blogcategory">Blogs Categorys</a>                                    
+                                    <a class="dropdown-item" href="/category">Products Categorys</a>                                    
+                                    <a class="dropdown-item" href="/color">Products Colors</a>                                    
                                 </div>
                             </li>
+                            @endcan
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
+                                <a class="nav-link dropdown-toggle" h id="navbarDropdown_1"
                                     role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Products
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
+                                    @can('admin-webmaster')
                                     <a class="dropdown-item" href="/produit/create">New Product</a>                                    
+                                    @endcan
                                     <a class="dropdown-item" href="/backoffice/produits">All Products</a>                                    
                                     <a class="dropdown-item" href="/backoffice/produits#likedProducts">Liked Products</a>                                    
                                 </div>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/users">Blogs</a>
-                            </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
+                                <a class="nav-link dropdown-toggle"  id="navbarDropdown_1"
+                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Blogs
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
+                                    <a class="dropdown-item" href="/blog/create">New Blog</a>                                    
+                                    <a class="dropdown-item" href="/backoffice/blogs">All Blogs</a>                                    
+                                </div>
+                            </li>
+                            @can('admin-access')
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle"  id="navbarDropdown_1"
                                     role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     MailBox
                                 </a>
@@ -54,6 +65,7 @@
                                     <a class="dropdown-item" href="/backoffice/mailbox/archives">Archives</a>                                    
                                 </div>
                             </li>
+                            @endcan
  
 
                         </ul>

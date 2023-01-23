@@ -18,6 +18,11 @@ use Intervention\Image\Facades\Image;
 
 class ProduitController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('AdminWebmaster')->only('edit','create');
+        $this->middleware('isAdmin')->only('destroy');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -52,7 +57,6 @@ class ProduitController extends Controller
         if ($request->image && $request->imageFile) {
             $request->validate([
                 "nom"=> ["required"],
-                "categorie_id"=> ["required"],
                 "couleur_id"=> ["required"],
                 "prix"=> ["required","integer"],
                 "stock"=> ["required","integer"],
@@ -64,7 +68,6 @@ class ProduitController extends Controller
        elseif($request->image == false && $request->imageFile == false) {
             $request->validate([
                 "nom"=> ["required"],
-                "categorie_id"=> ["required"],
                 "couleur_id"=> ["required"],
                 "prix"=> ["required","integer"],
                 "stock"=> ["required","integer"],
@@ -76,7 +79,6 @@ class ProduitController extends Controller
        else{
         $request->validate([
             "nom"=> ["required"],
-            "categorie_id"=> ["required"],
             "couleur_id"=> ["required"],
             "prix"=> ["required","integer"],
             "stock"=> ["required","integer"],
@@ -101,7 +103,7 @@ class ProduitController extends Controller
         $store->stock = $request->stock;
         $store->prixfinal = ($store->prix / 100) * (100 - $store->promo);
         $store->description = $request->description;
-        $store->save();
+        
 
         if ($request->image == true) {
             $image = Image::make($request->image)->resize(400, 400);
@@ -176,7 +178,6 @@ class ProduitController extends Controller
         if ($request->image && $request->imageFile) {
             $request->validate([
                 "nom"=> ["required"],
-                "categorie_id"=> ["required"],
                 "couleur_id"=> ["required"],
                 "prix"=> ["required","integer"],
                 "stock"=> ["required","integer"],
@@ -188,7 +189,6 @@ class ProduitController extends Controller
        elseif($request->image == false && $request->imageFile == false) {
             $request->validate([
                 "nom"=> ["required"],
-                "categorie_id"=> ["required"],
                 "couleur_id"=> ["required"],
                 "prix"=> ["required","integer"],
                 "stock"=> ["required","integer"],
@@ -200,7 +200,6 @@ class ProduitController extends Controller
        else{
         $request->validate([
             "nom"=> ["required"],
-            "categorie_id"=> ["required"],
             "couleur_id"=> ["required"],
             "prix"=> ["required","integer"],
             "stock"=> ["required","integer"],
@@ -212,13 +211,17 @@ class ProduitController extends Controller
         $produit->categorie_id = $request->categorie_id;
         $produit->couleur_id = $request->couleur_id;
 
-        if ($produit->image) {
+
+        if ($produit->id > 25) {
+            if ($produit->image) {
             Storage::delete('public/feature1/'.$produit->image);
             Storage::delete('public/feature2/'.$produit->image);
             Storage::delete('public/section1/'.$produit->image);
             Storage::delete('public/awesome/'.$produit->image);
             Storage::delete('public/panier/'.$produit->image);
         }
+        }
+        
         if ($produit->imageFile) {
             Storage::delete('public/feature1/'.$produit->imageFile);
             Storage::delete('public/feature2/'.$produit->imageFile);
@@ -284,11 +287,14 @@ class ProduitController extends Controller
     {
 
         if ($produit->image) {
-            Storage::delete('public/feature1/'.$produit->image);
+            if ($produit->id > 25) {
+                Storage::delete('public/feature1/'.$produit->image);
             Storage::delete('public/feature2/'.$produit->image);
             Storage::delete('public/section1/'.$produit->image);
             Storage::delete('public/awesome/'.$produit->image);
             Storage::delete('public/panier/'.$produit->image);
+            }
+            
         }
         if ($produit->imageFile) {
             Storage::delete('public/feature1/'.$produit->imageFile);

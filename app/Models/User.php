@@ -60,4 +60,7 @@ class User extends Authenticatable
     public function produits(){
         return $this->belongsToMany(Produit::class,'produit_users');
     }
+    public function blog(){
+        return $this->hasMany(Blog::class);
+    }
 }

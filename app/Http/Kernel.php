@@ -66,5 +66,8 @@ class Kernel extends HttpKernel
         'Backoffice' => \App\Http\Middleware\Backoffice::class,
         'IsAdmin' => \App\Http\Middleware\IsAdmin::class,
         'PanierFull' => \App\Http\Middleware\PanierFull::class,
+        'blog-confirm' => \App\Http\Middleware\BlogConfirm::class,
+        'AdminWebmaster' => \App\Http\Middleware\AdminWebmaster::class,
+        'BlogEdit' => \App\Http\Middleware\BlogEdit::class,
     ];
 }

@@ -19,6 +19,7 @@ class BlogSeeder extends Seeder
             [
                 "dateJ"=>15,
                 "dateM"=>'Jan',
+                "confirmation"=> true,
                 "image"=>'1.jpg',
                 "user_id"=>1,
                 "categoryblog_id"=>3,
@@ -28,6 +29,7 @@ class BlogSeeder extends Seeder
             [
                 "dateJ"=>16,
                 "dateM"=>'Jan',
+                "confirmation"=> true,
                 "image"=>'2.jpg',
                 "user_id"=>1,
                 "categoryblog_id"=>4,
@@ -37,6 +39,7 @@ class BlogSeeder extends Seeder
             [
                 "dateJ"=>17,
                 "dateM"=>'Jan',
+                "confirmation"=> true,
                 "image"=>'3.jpg',
                 "user_id"=>1,
                 "categoryblog_id"=>1,
@@ -46,6 +49,7 @@ class BlogSeeder extends Seeder
             [
                 "dateJ"=>20,
                 "dateM"=>'Jan',
+                "confirmation"=> true,
                 "image"=>'4.jpg',
                 "user_id"=>2,
                 "categoryblog_id"=>2,
@@ -55,6 +59,7 @@ class BlogSeeder extends Seeder
             [
                 "dateJ"=>21,
                 "dateM"=>'Jan',
+                "confirmation"=> true,
                 "image"=>'5.jpg',
                 "user_id"=>2,
                 "categoryblog_id"=>3,
@@ -64,6 +69,7 @@ class BlogSeeder extends Seeder
             [
                 "dateJ"=>23,
                 "dateM"=>'Jan',
+                "confirmation"=> true,
                 "image"=>'6.jpg',
                 "user_id"=>1,
                 "categoryblog_id"=>4,

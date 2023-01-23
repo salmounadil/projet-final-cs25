@@ -1,4 +1,4 @@
 @extends('layouts.app')
 @section('content')
-    @include('partials.backend.blog.blog')
+    @include('partials.backend.color.color')
 @endsection

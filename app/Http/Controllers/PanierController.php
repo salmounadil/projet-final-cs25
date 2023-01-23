@@ -21,7 +21,8 @@ use Illuminate\Support\Facades\Mail;
 class PanierController extends Controller
 {
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('PanierFull')->only('checkout');
     }
     /**
@@ -30,11 +31,11 @@ class PanierController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {
         $test = Produitpanier::find(9);
         $produitsPanier = Auth::user()->panier->produitsPanier;
         $produits = Produit::all();
-        return view('pages.frontend.panier',compact('produits','produitsPanier','test'));
+        return view('pages.frontend.panier', compact('produits', 'produitsPanier', 'test'));
     }
 
     /**
@@ -47,17 +48,17 @@ class PanierController extends Controller
         //
     }
 
-    public function coupon(Request $request){
-        if (Coupon::all()->where('nom',$request->coupon)->count()>0) {
-            $coupon = Coupon::all()->where('nom',$request->coupon)->first();
+    public function coupon(Request $request)
+    {
+        if (Coupon::all()->where('nom', $request->coupon)->count() > 0) {
+            $coupon = Coupon::all()->where('nom', $request->coupon)->first();
             $user = Auth::user();
-            $user->panier->prixOrder = $user->panier->paniertotal / 100 * ( 100 + $coupon->réduction);
+            $user->panier->prixOrder = $user->panier->paniertotal / 100 * (100 + $coupon->réduction);
             $user->panier->coupon_id = $coupon->id;
             $user->panier->save();
-            return redirect()->back()->with('success',"Coupon appliqué");
-        }
-        else{
-            return redirect()->back()->with('danger',"Ce coupon n'existe pas");
+            return redirect()->back()->with('success', "Coupon appliqué");
+        } else {
+            return redirect()->back()->with('danger', "Ce coupon n'existe pas");
         }
     }
 
@@ -71,125 +72,120 @@ class PanierController extends Controller
     {
         $produit = Produit::find($request->id);
         if ($produit->stock > 0) {
-           if (Auth::user()->panier->produitsPanier->where('produit_id',$request->id)->count() == 0) {
-                  $produitPanier = new Produitpanier();
-        $produitPanier->nom = $produit->nom;
-        if ($produit->image) {
-            $produitPanier->image = $produit->image;
-        }
-        if ($produit->imageFile) {
-            $produitPanier->image = $produit->imageFile;
-        }
-        $produitPanier->produit_id = $produit->id;
-        $produitPanier->prixfinal = $produit->prixfinal;
-        $produitPanier->quantité = 1.00;
-        $produitPanier->prixtotal = $produitPanier->prixfinal * $produitPanier->quantité ;
-        $produitPanier->panier_id = Auth::user()->panier->id;
-        $produitPanier->save();
-        $panier = Panier::find(Auth::user()->panier->id);
-        $panier->paniertotal += $produitPanier->prixtotal;
-        $panier->prixOrder = $panier->paniertotal;
-        $panier->save();
-        return redirect()->back()->with('success','Article ajouté au panier');  
-        }
-        else {
+            if (Auth::user()->panier->produitsPanier->where('produit_id', $request->id)->count() == 0) {
+                $produitPanier = new Produitpanier();
+                $produitPanier->nom = $produit->nom;
+                if ($produit->image) {
+                    $produitPanier->image = $produit->image;
+                }
+                if ($produit->imageFile) {
+                    $produitPanier->image = $produit->imageFile;
+                }
+                $produitPanier->produit_id = $produit->id;
+                $produitPanier->prixfinal = $produit->prixfinal;
+                $produitPanier->quantité = 1.00;
+                $produitPanier->prixtotal = $produitPanier->prixfinal * $produitPanier->quantité;
+                $produitPanier->panier_id = Auth::user()->panier->id;
+                $produitPanier->save();
+                $panier = Panier::find(Auth::user()->panier->id);
+                $panier->paniertotal += $produitPanier->prixtotal;
+                $panier->prixOrder = $panier->paniertotal;
+                $panier->save();
+                return redirect()->back()->with('success', 'Article ajouté au panier');
+            } else {
 
-            $request->validate([
-              "id"=> [new Produitdoublon()] 
-            ]);
+                Auth::user()->panier->paniertotal -= (Auth::user()->panier->produitsPanier->where('produit_id', $request->id)->first()->quantité * Auth::user()->panier->produitsPanier->where('produit_id', $request->id)->first()->prixfinal );
+                Auth::user()->panier->produitsPanier->where('produit_id', $request->id)->first()->quantité += 1;
+                Auth::user()->panier->produitsPanier->where('produit_id', $request->id)->first()->prixtotal = Auth::user()->panier->produitsPanier->where('produit_id', $request->id)->first()->quantité * Auth::user()->panier->produitsPanier->where('produit_id', $request->id)->first()->prixfinal  ;
+                Auth::user()->panier->paniertotal += Auth::user()->panier->produitsPanier->where('produit_id', $request->id)->first()->prixfinal * Auth::user()->panier->produitsPanier->where('produit_id', $request->id)->first()->quantité;
+                Auth::user()->panier->produitsPanier->where('produit_id', $request->id)->first()->save();
+                Auth::user()->panier->save();
+                return redirect()->back()->with('success', 'Article dans panier ; quantité + 1');
+            }
+        } else {
+            return redirect()->back()->with('danger', 'Nous n\'avons plus ce produit en stock.');
         }
-        }
-        else {
-            return redirect()->back()->with('danger','Nous n\'avons plus ce produit en stock.' );
-        }
-        
-
-
     }
 
-    public function addToPanier(Request $request){
+    public function addToPanier(Request $request)
+    {
         if (Auth::user()->panier->produitsPanier->where('produit_id', $request->idd)->count() == 0) {
             if ($request->quantité > 0) {
                 $produitPanier = new Produitpanier();
-            $produit = Produit::find($request->idd);
-            $produitPanier->nom = $produit->nom;
-            if ($produit->image) {
-                $produitPanier->image = $produit->image;
-            }
-            if ($produit->imageFile) {
-                $produitPanier->image = $produit->imageFile;
-            }
-            $produitPanier->produit_id = $produit->id;
-            $produitPanier->prixfinal = $produit->prixfinal;
-            $produitPanier->quantité = $request->quantité;
-            $produitPanier->prixtotal = $produitPanier->prixfinal * $produitPanier->quantité ;
-            $produitPanier->panier_id = Auth::user()->panier->id;
-            $produitPanier->save();
-            $panier = Panier::find(Auth::user()->panier->id);
-            $panier->paniertotal += $produitPanier->prixtotal;
-            $panier->prixOrder= $panier->paniertotal;
-            $panier->save();
-            return redirect('/panier')->with('success','Article ajouté au panier');  
-            }
-            else {
-                 $request->validate([
-                    "idd"=>[new Quantité()]
+                $produit = Produit::find($request->idd);
+                $produitPanier->nom = $produit->nom;
+                if ($produit->image) {
+                    $produitPanier->image = $produit->image;
+                }
+                if ($produit->imageFile) {
+                    $produitPanier->image = $produit->imageFile;
+                }
+                $produitPanier->produit_id = $produit->id;
+                $produitPanier->prixfinal = $produit->prixfinal;
+                $produitPanier->quantité = $request->quantité;
+                $produitPanier->prixtotal = $produitPanier->prixfinal * $produitPanier->quantité;
+                $produitPanier->panier_id = Auth::user()->panier->id;
+                $produitPanier->save();
+                $panier = Panier::find(Auth::user()->panier->id);
+                $panier->paniertotal += $produitPanier->prixtotal;
+                $panier->prixOrder = $panier->paniertotal;
+                $panier->save();
+                return redirect('/panier')->with('success', 'Article ajouté au panier');
+            } else {
+                $request->validate([
+                    "idd" => [new Quantité()]
                 ]);
             }
-            
-        }
-        else{
-            $pr = Auth::user()->panier->produitsPanier->where('produit_id', $request->idd)->first() ;
+        } else {
+            $pr = Auth::user()->panier->produitsPanier->where('produit_id', $request->idd)->first();
             $pr->quantité = $request->quantité;
             $panier = Panier::find(Auth::user()->panier->id);
             if ($pr->quantité > 0) {
                 $panier->paniertotal -= $pr->prixtotal;
-                $pr->prixtotal = $pr->quantité * $pr->prixfinal; 
+                $pr->prixtotal = $pr->quantité * $pr->prixfinal;
                 $panier->paniertotal +=  $pr->prixtotal;
                 $panier->paniertotal = $panier->paniertotal;
                 $panier->prixOrder = $panier->paniertotal;
-                $pr->save();  
-                $panier->save(); 
-                return redirect('/panier')->with('success','Quantité mise à jour') ;
-            }
-            else{
+                $pr->save();
+                $panier->save();
+                return redirect('/panier')->with('success', 'Quantité mise à jour');
+            } else {
 
                 $request->validate([
-                    "idd"=>[new Quantité()]
+                    "idd" => [new Quantité()]
                 ]);
-               
             };
-
         }
     }
 
 
-    public function quantité(Request $request){
-        $pr = Auth::user()->panier->produitsPanier->where('produit_id',$request->idd)->first();
+    public function quantité(Request $request)
+    {
+        $pr = Auth::user()->panier->produitsPanier->where('produit_id', $request->idd)->first();
         $pr->quantité = $request->quantité;
         $panier = Panier::find(Auth::user()->panier->id);
 
         if ($pr->quantité > 0) {
             $panier->paniertotal -= $pr->prixtotal;
-            $pr->prixtotal = $pr->quantité * $pr->prixfinal; 
+            $pr->prixtotal = $pr->quantité * $pr->prixfinal;
             $panier->paniertotal +=  $pr->prixtotal;
             $panier->paniertotal = $panier->paniertotal;
             $panier->prixOrder = $panier->paniertotal;
-            $pr->save();  
-            $panier->save();  
-        }
-        else {
+            $pr->save();
+            $panier->save();
+        } else {
             $panier->paniertotal -= $pr->prixtotal;
             $panier->prixOrder = $panier->paniertotal;
-            $panier->save(); 
+            $panier->save();
             $pr->delete();
         }
-        
+
         return redirect()->back();
     }
-  
 
-    public function checkout(){
+
+    public function checkout()
+    {
         return view('pages.frontend.checkout');
     }
 
@@ -201,7 +197,6 @@ class PanierController extends Controller
      */
     public function show(Panier $panier)
     {
- 
     }
 
     /**
@@ -212,51 +207,51 @@ class PanierController extends Controller
      */
     public function edit(Panier $panier)
     {
-      
     }
 
-    public function payer(Request $request){
+    public function payer(Request $request)
+    {
         if ($request->methode == true && $request->condition == true) {
-            
-            $request->validate([
-            'firstname' => ['required',],
-            'lastname' => ['required',],
-            'tel' => ['required'],
-            'email' => ['required','email'],
-            'pays'=> ['required'],
-            'adresse' => ['required'],
-            'ville' => ['required'],
-            'codepostal' => ['required','integer'],
-            
-            
-        ]);
-        }
-        if ($request->methode == true && $request->condition == false) {
-            
+
             $request->validate([
                 'firstname' => ['required',],
                 'lastname' => ['required',],
                 'tel' => ['required'],
-                'email' => ['required','email'],
-                'pays'=> ['required'],
+                'email' => ['required', 'email'],
+                'pays' => ['required'],
                 'adresse' => ['required'],
                 'ville' => ['required'],
-                'codepostal' => ['required','integer',],
+                'codepostal' => ['required', 'integer'],
+
+
+            ]);
+        }
+        if ($request->methode == true && $request->condition == false) {
+
+            $request->validate([
+                'firstname' => ['required',],
+                'lastname' => ['required',],
+                'tel' => ['required'],
+                'email' => ['required', 'email'],
+                'pays' => ['required'],
+                'adresse' => ['required'],
+                'ville' => ['required'],
+                'codepostal' => ['required', 'integer',],
                 'test' => [new Condition()]
-                
+
             ]);
         }
         if ($request->methode == false && $request->condition == true) {
-            
+
             $request->validate([
                 'firstname' => ['required',],
                 'lastname' => ['required',],
                 'tel' => ['required'],
-                'email' => ['required','email'],
-                'pays'=> ['required'],
+                'email' => ['required', 'email'],
+                'pays' => ['required'],
                 'adresse' => ['required'],
                 'ville' => ['required'],
-                'codepostal' => ['required','integer',],
+                'codepostal' => ['required', 'integer',],
                 'test' => [new Method()]
             ]);
         }
@@ -265,16 +260,16 @@ class PanierController extends Controller
                 'firstname' => ['required',],
                 'lastname' => ['required',],
                 'tel' => ['required'],
-                'email' => ['required','email'],
-                'pays'=> ['required'],
+                'email' => ['required', 'email'],
+                'pays' => ['required'],
                 'adresse' => ['required'],
                 'ville' => ['required'],
-                'codepostal' => ['required','integer',],
-                'test' => [new Method(),new Condition()]
-   
+                'codepostal' => ['required', 'integer',],
+                'test' => [new Method(), new Condition()]
+
             ]);
         }
-       
+
         $user = Auth::user();
         $order = new Order();
         $order->firstname = $request->firstname;
@@ -293,6 +288,14 @@ class PanierController extends Controller
         foreach ($user->panier->produitsPanier as $item) {
             $order->quantité += $item->quantité;
         }
+        foreach (Produit::all() as $prod) {
+            foreach (Auth::user()->panier->produitsPanier as $prodP) {
+                if ($prod->id == $prodP->produit_id && $prodP->panier_id == Auth::user()->panier->id ) {
+                    $prod->stock -= $prodP->quantité;
+                    $prod->save();
+                }
+            }
+        }
         $user->panier->coupon_id = null;
         $user->panier->prixOrder = 0;
         $user->panier->paniertotal = 0;
@@ -302,7 +305,7 @@ class PanierController extends Controller
         $user->panier->save();
         $order->save();
         Mail::to($request->email)->send(new OrderConfirm($order));
-        return redirect('/')->with('success','Nous avons bien reçu votre commande, nous la traiterons dans les plus brefs délais');
+        return redirect('/')->with('success', 'Nous avons bien reçu votre commande, nous la traiterons dans les plus brefs délais');
     }
 
 
