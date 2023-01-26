@@ -52,8 +52,8 @@
                             </div>
                         </div>
                     @endfor
+      
                         <script>
-                        
                         document.querySelectorAll('#test').forEach(element => {
                             element.addEventListener('click',()=>{
                                element.nextElementSibling.submit();

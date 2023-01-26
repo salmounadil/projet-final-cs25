@@ -77,7 +77,7 @@
                     </tbody>
                 </table>
                 <div class="checkout_btn_inner float-right">
-                    <a class="btn_1" href="/category">Continue Shopping</a>
+                    <a class="btn_1" href="/shopcategory">Continue Shopping</a>
                     @can('panier-full')
                         <a class="btn_1 checkout_btn_1" href="/panier/checkout">Proceed to checkout</a>
                     @endcan

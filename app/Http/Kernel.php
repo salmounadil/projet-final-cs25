@@ -69,5 +69,7 @@ class Kernel extends HttpKernel
         'blog-confirm' => \App\Http\Middleware\BlogConfirm::class,
         'AdminWebmaster' => \App\Http\Middleware\AdminWebmaster::class,
         'BlogEdit' => \App\Http\Middleware\BlogEdit::class,
+        'UserEdit' => \App\Http\Middleware\UserEdit::class,
+        'Check' => \App\Http\Middleware\Check::class,
     ];
 }

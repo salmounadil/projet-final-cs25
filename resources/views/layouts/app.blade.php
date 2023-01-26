@@ -47,6 +47,7 @@
     @yield('content')
     @include('partials.frontend.footer')
     <script src="https://kit.fontawesome.com/ce588dcfbf.js" crossorigin="anonymous"></script>
+   
 
     <script src="{{ asset('js/jquery-1.12.1.min.js') }}"></script>
     <!-- popper js -->

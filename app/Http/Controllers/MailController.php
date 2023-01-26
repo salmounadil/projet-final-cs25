@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Mail;
 
 class MailController extends Controller
 {
+    public function __construct(){
+        $this->middleware('IsAdmin')->only('reponse');
+    }
+
     public function productmail(Request $request){
             $request->validate([
                 "mail" => ["required", "email"]

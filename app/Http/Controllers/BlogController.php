@@ -20,6 +20,7 @@ class BlogController extends Controller
     public function __construct()
     {
         $this->middleware('blog-confirm')->only('confirm');
+        $this->middleware('Backoffice')->only('all','create');
     }
     /**
      * Display a listing of the resource.
@@ -201,6 +202,7 @@ class BlogController extends Controller
     public function edit(Blog $blog)
     {
         $edit = $blog;
+        $this->authorize('blog-redac',$edit);
         $categoryBlogs = Categoryblog::all();
         $tags = Tag::all();
         return view('pages.backend.blog.edit',compact('blog','categoryBlogs','tags','edit'));

@@ -15,26 +15,12 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/">Home</a>
                             </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_1"
-                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Shop
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                    <a class="dropdown-item" href="/shopcategory"> shop category</a>                                    
-                                </div>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/shopcategory">Shop</a>
                             </li>
-
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_2"
-                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    blog
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                    <a class="dropdown-item" href="/blog"> blog</a>
-                                </div>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/blog">Blogs</a>
                             </li>
-                            
                             <li class="nav-item">
                                 <a class="nav-link" href="/order/tracking">Tracking</a>
                             </li>
@@ -42,14 +28,8 @@
                                 <a class="nav-link" href="/contact">Contact</a>
                             </li>
                             @can('backoffice-access')
-                                <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-primary" href="/backoffice" id="navbarDropdown_2 "
-                                    role="button" aria-haspopup="true" aria-expanded="false">
-                                    Backoffice
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
-                                    <a class="dropdown-item" href="/backoffice"> Item</a>
-                                </div>
+                            <li class="nav-item ">
+                                <a class="nav-link text-danger" href="/backoffice">Backoffice</a>
                             </li>
                             @endcan
                             

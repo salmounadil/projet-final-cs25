@@ -45,5 +45,14 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('blog-redac', function($user,$blog) {
             return $user->role_id == 1 || ($user->role_id == 2 && ($blog->user_id == $user->id || $blog->user_id == 3)) || ($user->role_id == 3 && $blog->user_id == $user->id) ;
         });
+        Gate::define('user-edit', function($user,$util) {
+            if (Auth::check()) {
+                return $user->role_id == 1 && $util->id == $user->id || ($user->role_id == 1 && ($util->id != $user->id && $util->role_id != 1)) ;
+            }
+            else
+            {
+                return false;
+            }
+        });
     }
 }

@@ -17,10 +17,15 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->role_id == 1 ) {
+        if (Auth::check()) {
+            if (Auth::user()->role_id == 1 ) {
             return $next($request);
-            
         }
+        else{
+            return redirect()->back()->with("danger","Vous n'etes pas autorisé à accéder à cette page");
+        }
+        }
+        
         else {
             return redirect()->back()->with("danger","Vous n'etes pas autorisé à accéder à cette page");
         }

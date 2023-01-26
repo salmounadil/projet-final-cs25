@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Auth;
 
 class LikeController extends Controller
 {
+    public function __construct(){
+        $this->middleware('AdminWebmaster')->only('index');
+    }
     public function like(Request $request){
 
         $produit = Produit::find($request->id);

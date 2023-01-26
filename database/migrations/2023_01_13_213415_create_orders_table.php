@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('methode');
             $table->string('ville');
+            $table->integer('user_id');
             $table->integer('codepostal');
             $table->string('adresse');
             $table->string('tel');

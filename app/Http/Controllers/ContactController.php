@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('IsAdmin');
+    }
     /**
      * Display a listing of the resource.
      *

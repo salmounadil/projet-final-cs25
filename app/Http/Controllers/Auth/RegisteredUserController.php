@@ -119,14 +119,12 @@ class RegisteredUserController extends Controller
 
         if ($request->image == true) {
             $image = Image::make($request->image)->resize(50, 50);
-            // Storage::put('public/', $image);
-            Storage::disk('local')->put('public/'.$request->username.'.jpg', $image->stream(), 'public');
+            Storage::disk('local')->put('public/users/'.$request->username.'.jpg', $image->stream(), 'public');
 
         }
         elseif ($request->file('imageFile') == true) {
             $image = Image::make($request->file('imageFile'))->resize(50, 50);
-            // Storage::put('public/',$request->file('imageFile'));
-            Storage::disk('local')->put('public/'.$user->imageFile, $image->stream(), 'public');
+            Storage::disk('local')->put('public/users/'.$user->imageFile, $image->stream(), 'public');
         }
 
         

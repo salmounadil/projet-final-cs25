@@ -8,6 +8,7 @@ use App\Http\Controllers\ColorController;
 use App\Http\Controllers\ComblogController;
 use App\Http\Controllers\CommentaireController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\MailController;
@@ -80,6 +81,7 @@ Route::resource('tag', TagController::class);
 Route::resource('category', CategorieController::class);
 Route::resource('color', ColorController::class);
 Route::resource('blogcategory', BlogCategorieController::class);
+Route::resource('coupon', CouponController::class);
 Route::post('/comBlog', [ComblogController::class,'store']);
 
 Route::get('/dashboard', function () {

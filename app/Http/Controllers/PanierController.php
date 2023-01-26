@@ -24,6 +24,7 @@ class PanierController extends Controller
     public function __construct()
     {
         $this->middleware('PanierFull')->only('checkout');
+        $this->middleware('Check')->only('index');
     }
     /**
      * Display a listing of the resource.
@@ -273,6 +274,7 @@ class PanierController extends Controller
         $user = Auth::user();
         $order = new Order();
         $order->firstname = $request->firstname;
+        $order->user_id = Auth::user()->id;
         $order->lastname = $request->lastname;
         $order->tel = $request->tel;
         $order->email = $request->email;

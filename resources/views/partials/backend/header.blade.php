@@ -13,7 +13,7 @@
                     <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link" href="/">Home</a>
+                                <a class="nav-link text-danger" href="/">Frontend</a>
                             </li>
                             @can('admin-access')
                             <li class="nav-item dropdown">
@@ -28,22 +28,23 @@
                                     <a class="dropdown-item" href="/blogcategory">Blogs Categorys</a>                                    
                                     <a class="dropdown-item" href="/category">Products Categorys</a>                                    
                                     <a class="dropdown-item" href="/color">Products Colors</a>                                    
+                                    <a class="dropdown-item" href="/coupon">Coupons</a>                                    
                                 </div>
                             </li>
                             @endcan
+                            @can('admin-webmaster')
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" h id="navbarDropdown_1"
                                     role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Products
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
-                                    @can('admin-webmaster')
                                     <a class="dropdown-item" href="/produit/create">New Product</a>                                    
-                                    @endcan
                                     <a class="dropdown-item" href="/backoffice/produits">All Products</a>                                    
                                     <a class="dropdown-item" href="/backoffice/produits#likedProducts">Liked Products</a>                                    
                                 </div>
                             </li>
+                            @endcan
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle"  id="navbarDropdown_1"
                                     role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -65,9 +66,7 @@
                                     <a class="dropdown-item" href="/backoffice/mailbox/archives">Archives</a>                                    
                                 </div>
                             </li>
-                            @endcan
- 
-
+                            @endcan 
                         </ul>
                     </div>
                     <div class="hearer_icon d-flex">

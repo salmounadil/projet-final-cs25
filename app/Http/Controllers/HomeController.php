@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
+    public function __construct(){
+        $this->middleware('Check')->only('like');
+    }
     public function home(){
 
     $produits = Produit::all();

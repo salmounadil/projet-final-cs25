@@ -201,7 +201,7 @@
                                                     <img class="rounded-circle" src="{{ asset('storage/users/' . $commentaire->user->imageFile) }}"
                                                         alt="" />
                                                 @endif   
-                                                @else
+                                            @else
                                                     
                                                 <div class="h5 d-flex justify-content-center align-items-center text-center p-0 text-white" style="height: 50px; width:50px; border-radius:50%; background-color:#455a64;">{{ strtoupper($commentaire->nom[0])  }}</div>
                                             @endif

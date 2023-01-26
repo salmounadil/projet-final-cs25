@@ -21,7 +21,7 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="confirmation_tittle">
-            <span class="text-success">Votre commande a bien été confirmé et expediée.</span>
+            <span class="text-success">Cette commande a bien été confirmé et expediée.</span>
           </div>
         </div>
         <div class="col-lg-6 col-lx-4">

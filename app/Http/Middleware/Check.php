@@ -6,9 +6,8 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class Backoffice
+class Check
 {
-    
     /**
      * Handle an incoming request.
      *
@@ -18,16 +17,11 @@ class Backoffice
      */
     public function handle(Request $request, Closure $next)
     {
-
         if (Auth::check()) {
-            if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2 || Auth::user()->role_id == 3) {
             return $next($request);
-            
         }
-        }
-        
         else {
-            return redirect()->back()->with("danger","Vous n'etes pas autorisé à accéder à cette page");
+            return redirect('login')->with('danger','Veuillez vous connecter pour accéder à cette page.');
         }
     }
 }

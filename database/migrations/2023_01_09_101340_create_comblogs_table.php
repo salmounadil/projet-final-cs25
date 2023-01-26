@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('date'); 
             $table->string('message'); 
             $table->foreignId('blog_id')->constrained(); 
-            $table->foreignId('user_id')->nullable()->constrained(); 
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete(); 
             $table->timestamps();
         });
     }

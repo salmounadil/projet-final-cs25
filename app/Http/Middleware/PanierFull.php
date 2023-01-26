@@ -17,8 +17,8 @@ class PanierFull
      */
     public function handle(Request $request, Closure $next)
     {
-
-        if (Auth::user()->panier->produitsPanier->count() > 0) {
+        if (Auth::check()) {
+            if (Auth::user()->panier->produitsPanier->count() > 0) {
             return $next($request);
         }
         else
@@ -26,4 +26,9 @@ class PanierFull
             return redirect()->back()->with("danger","Votre panier est vide ...");
         }
     }
+    else {
+        return redirect()->back()->with("danger","Veuillez vous connecter ...");
+    }
+        }
+        
 }

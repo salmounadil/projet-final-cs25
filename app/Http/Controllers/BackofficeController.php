@@ -2,7 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
+use App\Models\Categorie;
+use App\Models\Categoryblog;
 use App\Models\Contact;
+use App\Models\Couleur;
+use App\Models\Coupon;
+use App\Models\Order;
+use App\Models\Produit;
+use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class BackofficeController extends Controller
@@ -15,8 +24,18 @@ class BackofficeController extends Controller
   
 
     public function backoffice (){
-        
-        return view('pages.backend.home');
+        $users = User::all();
+        $blogs = Blog::all();
+        $categories = Categorie::all();
+        $categoryblogs = Categoryblog::all();
+        $contacts = Contact::all();
+        $couleurs = Couleur::all();
+        $produits = Produit::all();
+        $orders = Order::all();
+        $tags = Tag::all();
+        $coupons = Coupon::all();
+
+        return view('pages.backend.home',compact('users','blogs','categories','categoryblogs','contacts','couleurs','produits','orders','tags','coupons'));
     }
 
     public function mailbox(){
