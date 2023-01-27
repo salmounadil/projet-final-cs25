@@ -7970,6 +7970,9 @@ h6 {
   width: 90vw !important;
 }
 
+*{
+  user-select: none;
+}
 /* .droppp{
   padding-top: 10px;
 } */
