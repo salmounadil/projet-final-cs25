@@ -18,7 +18,7 @@ class Contact extends Mailable
      *
      * @return void
      */
-    public function __construct($contact)
+    public function __construct(private $contact)
     {
         $this->contact = $contact;
     }

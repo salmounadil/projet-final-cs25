@@ -88,9 +88,10 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'panier_id'=> $panier->id
         ]);
+        $util = $user;
         $panier->user_id = $user->id;
         $panier->save();
-        Mail::to($user->email)->send(new Confirmation);
+        Mail::to($user->email)->send(new Confirmation($util));
        }
        elseif ($request->image) {
         $panier = new Panier();
@@ -101,9 +102,10 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'panier_id'=> $panier->id
         ]);
+        $util = $user;
         $panier->user_id = $user->id;
         $panier->save();
-        Mail::to($user->email)->send(new Confirmation);
+        Mail::to($user->email)->send(new Confirmation($util));
        }
 
        if ($request->newsletter && Newsletter::all()->where('email',$request->email)->count() == 0 ) {

@@ -61,11 +61,9 @@
 <body class="bg-animation">
     <div class="container">
         <img src="{{ $message->embed('img/logo.png') }}" alt="Logo" class="logo">
-        <h1>Salut nom,</h1>
-        <p>Merci de vous être inscrit sur notre site. Votre adresse e-mail est email.</p>
-        <p>Cliquez sur le lien ci-dessous pour activer votre compte :</p>
-        <a href="">Activer mon compte</a>
-        <p>Si vous rencontrez des problèmes, veuillez nous contacter à l'adresse adresse.</p>
+        <h1>Salut {{ $util->username }},</h1>
+        <p>Merci de vous être inscrit sur notre site. Votre adresse e-mail est {{ $util->email }}.</p>
+        <p>Cordialement</p>
         <div class="footer">
             L'équipe equipe
         </div>

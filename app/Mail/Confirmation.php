@@ -18,9 +18,9 @@ class Confirmation extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(private $util)
     {
-        //
+        $this->util = $util;
     }
 
     /**
@@ -53,7 +53,8 @@ class Confirmation extends Mailable
     }
 
     public function build(){
-        return $this->view('mails.confirmation');
+        return $this->view('mails.confirmation')
+                    ->with('util',$this->util);
     }
 }
 
