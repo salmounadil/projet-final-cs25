@@ -92,7 +92,7 @@ class PanierController extends Controller
                 $panier->paniertotal += $produitPanier->prixtotal;
                 $panier->prixOrder = $panier->paniertotal;
                 $panier->save();
-                return redirect()->back()->with('success', 'Article ajouté au panier');
+                return redirect('/panier')->with('success', 'Article ajouté au panier');
             } else {
 
                 Auth::user()->panier->paniertotal -= (Auth::user()->panier->produitsPanier->where('produit_id', $request->id)->first()->quantité * Auth::user()->panier->produitsPanier->where('produit_id', $request->id)->first()->prixfinal );
@@ -101,7 +101,7 @@ class PanierController extends Controller
                 Auth::user()->panier->paniertotal += Auth::user()->panier->produitsPanier->where('produit_id', $request->id)->first()->prixfinal * Auth::user()->panier->produitsPanier->where('produit_id', $request->id)->first()->quantité;
                 Auth::user()->panier->produitsPanier->where('produit_id', $request->id)->first()->save();
                 Auth::user()->panier->save();
-                return redirect()->back()->with('success', 'Article dans panier ; quantité + 1');
+                return redirect('/panier')->with('success', 'Article dans panier ; quantité + 1');
             }
         } else {
             return redirect()->back()->with('danger', 'Nous n\'avons plus ce produit en stock.');

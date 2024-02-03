@@ -21,7 +21,7 @@ class ProduitController extends Controller
 
     public function __construct(){
         $this->middleware('AdminWebmaster')->only('edit','create');
-        $this->middleware('isAdmin')->only('destroy');
+        $this->middleware('IsAdmin')->only('destroy');
     }
     /**
      * Display a listing of the resource.
@@ -58,6 +58,7 @@ class ProduitController extends Controller
             $request->validate([
                 "nom"=> ["required"],
                 "couleur_id"=> ["required"],
+                "promo"=>["required"],
                 "prix"=> ["required","integer"],
                 "stock"=> ["required","integer"],
                 "description"=> ["required"],
@@ -69,6 +70,7 @@ class ProduitController extends Controller
             $request->validate([
                 "nom"=> ["required"],
                 "couleur_id"=> ["required"],
+                "promo"=>["required"],
                 "prix"=> ["required","integer"],
                 "stock"=> ["required","integer"],
                 "description"=> ["required"],
@@ -80,6 +82,7 @@ class ProduitController extends Controller
         $request->validate([
             "nom"=> ["required"],
             "couleur_id"=> ["required"],
+            "promo"=>["required"],
             "prix"=> ["required","integer"],
             "stock"=> ["required","integer"],
             "description"=> ["required"],
@@ -179,6 +182,7 @@ class ProduitController extends Controller
             $request->validate([
                 "nom"=> ["required"],
                 "couleur_id"=> ["required"],
+                "promo"=>["required"],
                 "prix"=> ["required","integer"],
                 "stock"=> ["required","integer"],
                 "description"=> ["required"],
@@ -190,6 +194,7 @@ class ProduitController extends Controller
             $request->validate([
                 "nom"=> ["required"],
                 "couleur_id"=> ["required"],
+                "promo"=>["required"],
                 "prix"=> ["required","integer"],
                 "stock"=> ["required","integer"],
                 "description"=> ["required"],
@@ -201,6 +206,7 @@ class ProduitController extends Controller
         $request->validate([
             "nom"=> ["required"],
             "couleur_id"=> ["required"],
+            "promo"=>["required"],
             "prix"=> ["required","integer"],
             "stock"=> ["required","integer"],
             "description"=> ["required"],
